@@ -11,12 +11,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/348086239/react-base-cli"
+    "url": "https://github.com/huanyan610/react-base-cli"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/348086239/react-base-cli/issues"
+    "url": "https://github.com/huanyan610/react-base-cli/issues"
   },
   "dependencies": {
     "chalk": "^4.1.0",
