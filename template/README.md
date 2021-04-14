@@ -1,7 +1,7 @@
 # react-base
 
 ### 介绍
-DDcodeSchool架构配置包括api、router、store、layouts等
+react-base架构配置包括api、router、store、layouts等
 本项目采用react技术为基础开发者没有特殊业务情况一律采用react hooks方法开发。
 
 ### 版本须知
