@@ -6,7 +6,7 @@ react-base架构配置包括api、router、store、layouts等
 
 ### 版本须知
 （该部分是针对当前项目开发或者使用的库或者环境的版本声明）
-1. Node v10.x
+1. Node v12.x
 2. React v16.x
 
 ### 软件架构
