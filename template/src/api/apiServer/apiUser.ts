@@ -1,6 +1,7 @@
 import Axios from '@/api/apiConfig/axios';
 
-const interfaceName = 'users';
+import {apiFragment} from  "@/api/apiConfig/apiBase"
+
 
 /**
  *登录
@@ -13,7 +14,7 @@ const interfaceName = 'users';
 export const login = async (req: any) => {
   try {
     return await Axios.request({
-      url: `${interfaceName}/login`,
+      url: `${apiFragment.apiBase}/login`,
       data: req,
       method: 'POST'
     });

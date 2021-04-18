@@ -7,8 +7,7 @@ export const apiBaseUrl = {
 
 // api微服务区分标识
 export const apiFragment: IapiFragment = {
-  ddcEdu: 'ddc-edu3',
-  ddcPort: 'ddc-port',
-  ddcBase: 'ddc-base',
-  ddcDdm: 'ddc-ddm'
+
+  apiBase: 'api-base',
+
 };

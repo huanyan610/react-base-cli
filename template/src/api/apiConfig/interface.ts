@@ -5,8 +5,5 @@ export interface ResData {
 }
 
 export interface IapiFragment {
-  ddcEdu: string;
-  ddcPort: string;
-  ddcBase: string;
-  ddcDdm: string;
+  apiBase: string;
 }
