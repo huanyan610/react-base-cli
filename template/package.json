@@ -70,9 +70,6 @@
     "test": "react-app-rewired test",
     "release": "node ./node_modules/standard2version/lib/release.js"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
   "browserslist": {
     "production": [
       ">0.2%",

@@ -365,3 +365,8 @@ class Validate {
 
 export const validate = new Validate();
 
+export const sleep = (time: number) => {
+  return new Promise<void>((resolve, reject) => {
+    if (time) setTimeout(() => resolve(), time);
+  });
+};

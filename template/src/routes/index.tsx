@@ -1,6 +1,6 @@
 import React, { Suspense } from 'react';
 import DocumentTitle from 'react-document-title';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Redirect, Switch } from 'react-router-dom';
 import { MenuBase } from './config';
 import NotFound from '@/pages/notFound';
 
@@ -39,7 +39,8 @@ function renderRoutes(routes: MenuBase[], extraProps = {}, switchProps = {}) {
           />
         );
       })}
-      <Route key="/404" path="/404" exact component={NotFound} />
+      <Route path="/notFound" component={NotFound} />
+      <Redirect to="/notFound" />
     </Switch>
   ) : null;
 }

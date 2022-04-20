@@ -40,11 +40,11 @@ const routes: MenuBase[] = [
     component: lazy(() => import('@/pages/hooksDemo'))
   },
   {
-    path: '/404',
-    name: '404',
+    path: '/notFound',
+    name: 'notFound',
     exact: true,
-    component: lazy(() => import('@/pages/notFound'))
-  }
+    component: lazy(() => import('@/pages/notFound')),
+  },
 ];
 
 export default routes;
