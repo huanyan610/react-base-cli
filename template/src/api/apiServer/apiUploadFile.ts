@@ -1,5 +1,5 @@
 import Axios from '@/api/apiConfig/axios';
-import { apiFragment } from '@/api/apiConfig/apiBase';
+import { apiFragment } from '@/api/apiConfig/base';
 
 /**
  * @description 获取上传密钥

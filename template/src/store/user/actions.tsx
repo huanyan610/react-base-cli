@@ -16,7 +16,7 @@ export const userTokenAction = (payload: any) => ({
  *
  * @returns {Object}
  */
-export const fetchLoginAction = (req: any): ThunkResult<Promise<number | undefined>> => {
+export const fetchLoginAction = (req: any): ThunkResult<Promise<any>> => {
   return async (dispatch: any) => {
     let {
       data: { code, data, msg }
