@@ -12,8 +12,7 @@
     "postbuild": "cross-env CI=false next-sitemap --config next-sitemap.config.js",
     "lint": "next lint",
     "lint:fix": "eslint --fix --cache --ext .js,.jsx,.ts,.tsx ./src",
-    "lint-staged:js": "eslint --ext .js,.jsx,.ts,.tsx",
-    "prepare": "husky install"
+    "lint-staged:js": "eslint --ext .js,.jsx,.ts,.tsx"
   },
   "lint-staged": {
     "*.{js,jsx,tsx,ts,scss,json}": [

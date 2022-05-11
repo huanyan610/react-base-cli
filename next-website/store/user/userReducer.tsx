@@ -8,15 +8,15 @@ export const initState = {
   },
 };
 
-const userReducer = (state = initState, action: { type: constants; payload: any }) => {
+const userReducer = (state = initState, action: any) => {
   switch (action.type) {
+    // Attention! This will overwrite client state! Real apps should use proper reconciliation.
     case HYDRATE:
-      // Attention! This will overwrite client state! Real apps should use proper reconciliation.
       return { ...state.server, ...action.payload.userReducer };
     //登录token
     case constants.USER_TOKEN:
       return {
-        ...state,
+        ...state.client,
         token: action.payload,
       };
 
