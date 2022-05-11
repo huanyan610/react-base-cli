@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://card-game.xingzheai.cn
+
+# Sitemaps
+Sitemap: https://card-game.xingzheai.cn/sitemap.xml
