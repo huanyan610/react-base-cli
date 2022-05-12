@@ -4,3 +4,5 @@ declare module '*.module.less' {
 }
 
 declare module 'localStorage';
+
+declare module 'redux-persist/integration/react';

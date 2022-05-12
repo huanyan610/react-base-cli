@@ -1,9 +1,22 @@
-import Document, { Html, Head, Main, NextScript } from 'next/document';
+import Document, { Html, Head, Main, NextScript, DocumentContext } from 'next/document';
 
 class MyDocument extends Document {
-  static async getInitialProps(ctx: any) {
+  static async getInitialProps(ctx: DocumentContext) {
+    const originalRenderPage = ctx.renderPage;
+
+    // Run the React rendering logic synchronously
+    ctx.renderPage = () =>
+      originalRenderPage({
+        // Useful for wrapping the whole react tree
+        enhanceApp: (App) => App,
+        // Useful for wrapping in a per-page basis
+        enhanceComponent: (Component) => Component,
+      });
+
+    // Run the parent `getInitialProps`, it now includes the custom `renderPage`
     const initialProps = await Document.getInitialProps(ctx);
-    return { ...initialProps };
+
+    return initialProps;
   }
 
   render() {
@@ -26,7 +39,7 @@ class MyDocument extends Document {
           <meta name="robots" content="index,follow" />
           <meta name="360-site-verification" content="360" />
           <meta name="renderer" content="webkit" />
-          <meta property="og:title" content="nextjs-web" />
+          <meta property="og:title" content="" />
           <meta property="og:url" content="" />
           <meta property="og:image" content="" />
           <meta property="og:image:width" content="200" />
@@ -35,7 +48,7 @@ class MyDocument extends Document {
         </Head>
         <body>
           <Main />
-          <NextScript />
+          <NextScript></NextScript>
         </body>
       </Html>
     );
