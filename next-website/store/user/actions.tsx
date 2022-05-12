@@ -1,4 +1,4 @@
-import { constants } from './constants';
+import constants from './constants';
 import { login } from '@api/controller/loginController';
 import { message } from 'antd';
 import { ThunkResult } from '../interface/index';
