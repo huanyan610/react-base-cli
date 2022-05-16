@@ -1,22 +1,16 @@
 import constants from './constants';
 import { HYDRATE } from 'next-redux-wrapper';
-export const initState = {
-  server: {},
-  client: {
-    token: '', //登录获取的token
-    userInfo: {}, //用户详情
-  },
-};
+export const initState = {};
 
 const userReducer = (state = initState, action: any) => {
   switch (action.type) {
     // Attention! This will overwrite client state! Real apps should use proper reconciliation.
     case HYDRATE:
-      return { ...state.server, ...action.payload.userReducer };
+      return { ...state, ...action.payload.userReducer };
     //登录token
     case constants.USER_TOKEN:
       return {
-        ...state.client,
+        ...state,
         token: action.payload,
       };
 

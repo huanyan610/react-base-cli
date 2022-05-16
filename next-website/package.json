@@ -47,6 +47,7 @@
     "@zeit/next-css": "^1.0.1",
     "ahooks": "^3.3.10",
     "antd": "^4.20.3",
+    "antd-mobile": "^5.12.2",
     "axios": "^0.27.2",
     "cross-env": "^7.0.3",
     "crypto-js": "^4.1.1",
@@ -67,6 +68,8 @@
     "redux-thunk": "^2.4.1"
   },
   "devDependencies": {
+    "@babel/preset-env": "^7.17.10",
+    "@our-patches/postcss-px-to-viewport": "^1.2.0",
     "@styled-jsx/plugin-sass": "^4.0.2",
     "@types/axios": "^0.14.0",
     "@types/crypto-js": "^4.1.1",
@@ -80,6 +83,7 @@
     "@types/styled-jsx": "^3.4.4",
     "@typescript-eslint/eslint-plugin": "^5.22.0",
     "@typescript-eslint/parser": "^5.22.0",
+    "autoprefixer": "^10.4.7",
     "babel-plugin-import": "^1.13.5",
     "eslint": "8.15.0",
     "eslint-config-next": "12.1.6",
@@ -99,9 +103,14 @@
     "next-plugin-antd-less": "^1.8.0",
     "next-sitemap": "^2.5.20",
     "next-transpile-modules": "^9.0.0",
+    "postcss": "^8.4.13",
+    "postcss-flexbugs-fixes": "^5.0.2",
+    "postcss-preset-env": "^7.5.0",
+    "postcss-px-to-viewport": "^1.1.1",
     "prettier": "^2.6.2",
     "redux-devtools-extension": "^2.13.9",
     "sass": "^1.51.0",
+    "tailwindcss": "^3.0.24",
     "typescript": "4.6.4",
     "webpack-bundle-analyzer": "^4.5.0"
   }

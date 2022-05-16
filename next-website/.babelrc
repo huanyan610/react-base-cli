@@ -6,17 +6,21 @@
         "styled-jsx": {
           "plugins": ["@styled-jsx/plugin-sass"]
         },
+        "targets": {
+          "chrome": "49",
+          "ios": "10"
+        },
         "optimizeForSpeed": true
       }
     ]
   ],
+
   "plugins": [
+    ["import", { "libraryName": "antd", "libraryDirectory": "lib", "style": false }, "antd"],
     [
       "import",
-      {
-        "libraryName": "antd",
-        "style": true
-      }
+      { "libraryName": "antd-mobile", "libraryDirectory": "es/components", "style": false },
+      "antd-mobile"
     ]
   ]
 }

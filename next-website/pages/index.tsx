@@ -3,6 +3,9 @@ import type { NextPage } from 'next';
 
 import Head from 'next/head';
 import Image from 'next/image';
+import { Button as MButton } from 'antd-mobile';
+import { Button } from 'antd';
+
 import styles from '../styles/Home.module.css';
 
 const Home: NextPage = () => {
@@ -13,14 +16,14 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main}>
+        <MButton color="primary">MButton</MButton>
+        <Button>Button</Button>
         <h1 className={styles.title}>
           Welcome to <a href="https://nextjs.org">Next.js!</a>
         </h1>
-
         <p className={styles.description}>
           Get started by editing <code className={styles.code}>pages/index.tsx</code>
         </p>
-
         <div className={styles.grid}>
           <a href="https://nextjs.org/docs" className={styles.card}>
             <h2>Documentation &rarr;</h2>
