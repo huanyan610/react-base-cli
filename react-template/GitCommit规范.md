@@ -9,7 +9,6 @@
 
 #### 使用说明
 
-
 执行 git cz，任何 git commit 指令的 option 都能用在  git cz 指令上, 例如 git cz -a，根据提示依次填写:
 
 ```

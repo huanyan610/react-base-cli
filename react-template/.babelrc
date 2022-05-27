@@ -1,4 +1,14 @@
 {
   "presets": ["react-app"],
-  "plugins": [["@babel/plugin-transform-runtime"], ["@babel/plugin-proposal-object-rest-spread"]]
+  "plugins": [
+    ["@babel/plugin-transform-runtime"],
+    ["@babel/plugin-proposal-object-rest-spread"],
+    [
+      "import",
+      {
+        "libraryName": "antd"
+        // "style": "true"
+      }
+    ]
+  ]
 }

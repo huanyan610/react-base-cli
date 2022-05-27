@@ -9,7 +9,7 @@ import styles from './index.module.scss';
 const classNames = require('classnames');
 interface Iprops {}
 
-const NotFound: FC<Iprops> = props => {
+const NotFound: FC<Iprops> = (props) => {
   const history = useHistory();
   return (
     <div className={classNames(styles['NotFoundWrap'])}>

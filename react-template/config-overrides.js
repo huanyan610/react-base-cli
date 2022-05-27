@@ -19,16 +19,17 @@ module.exports = {
   webpack: override(
     rewiredOutputPath(),
     addWebpackAlias({
-      '@': path.resolve(__dirname, 'src')
+      '@': path.resolve(__dirname, 'src'),
     }),
     // antd按需加载
     fixBabelImports('import', {
       libraryName: 'antd',
       libraryDirectory: 'es',
-      style: true
+      style: true,
     }),
     //配置主题
     addLessLoader({
+      // 如果使用less-loader@5，请移除 lessOptions 这一级直接配置选项。
       lessOptions: {
         modifyVars: {
           '@primary-color': '#1476FF',
@@ -41,10 +42,10 @@ module.exports = {
           '@input-padding-vertical-lg': '8px',
           '@font-family': 'PingFangSC-Regular, PingFang SC',
           '@code-family': 'Monaco, Menlo, Ubuntu Mono, Consolas, source-code-pro, monospace',
-          '@layout-header-background': '#FFF'
+          '@layout-header-background': '#FFF',
         },
-        javascriptEnabled: true
-      }
+        javascriptEnabled: true,
+      },
     })
-  )
+  ),
 };

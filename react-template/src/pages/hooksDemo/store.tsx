@@ -12,11 +12,11 @@ const asyncAction = (dispatch: Dispatch<any>) => {
         console.log('执行addActions ,请求后: ' + Date.now());
         dispatch(addActions()); //执行同步action
       }, 1000);
-    }
+    },
   };
 };
 export const initialReucer = {
-  count: 100
+  count: 100,
 };
 export function reducer(state: typeof initialReucer, action: { type: typeof ADD_COUNTER }) {
   switch (action.type) {

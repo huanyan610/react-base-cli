@@ -11,7 +11,7 @@ import React, {
   useImperativeHandle,
   ChangeEvent,
   SyntheticEvent,
-  memo
+  memo,
 } from 'react';
 const Test: FC = (): JSX.Element => {
   const testRef: MutableRefObject<any> = useRef('test');
@@ -38,7 +38,7 @@ function TestChild(props: {}, ref: Ref<any>): JSX.Element {
     return {
       //(testRef.current as HTMLInputElement) 类型断言，自己肯定就是这样的类型
       value: (testRef.current as HTMLInputElement).value, //暴露出input的value
-      type: () => (testRef.current as HTMLInputElement).type //暴露出input的type类型
+      type: () => (testRef.current as HTMLInputElement).type, //暴露出input的type类型
     };
   });
   return (

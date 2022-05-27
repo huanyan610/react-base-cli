@@ -50,9 +50,10 @@ const HooksDemo: FC = () => {
         {/* 引入子组件 */}
         {/* <TestChild/>       把父组件的状态和设置状态的函数传递给子组件     */}
         <MemoTestChild3
-          name={useMemo(() => ({ name3, color: name3.indexOf('name') !== -1 ? 'red' : 'green' }), [
-            name3
-          ])}
+          name={useMemo(
+            () => ({ name3, color: name3.indexOf('name') !== -1 ? 'red' : 'green' }),
+            [name3]
+          )}
           onClick={useCallback((newName: string) => setName3(newName), [])}
         />
         {/* useCallback((newName: string) => setName(newName),[]) */}
@@ -73,7 +74,6 @@ const HooksDemo: FC = () => {
 //创建一个子组件
 function Child1(): JSX.Element {
   console.log('TestChild1运行了?');
-  console.log(1111);
   return <h3>我是子组件1</h3>;
 }
 interface TestChildPropsType2 {

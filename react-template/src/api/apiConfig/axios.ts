@@ -1,16 +1,10 @@
 import { message } from 'antd';
 import axios, { AxiosInstance, AxiosPromise, AxiosRequestConfig, AxiosResponse } from 'axios'; // 引入axios和定义在node_modules/axios/index.ts文件里的类型声明
 import Cookies from 'js-cookie';
-import { cloneDeep } from 'lodash';
-import CryptoJS from 'crypto-js';
-import { apiBaseUrl } from './base';
+import { cloneDeep, has, isPlainObject, throttle } from 'lodash';
+import { apiBaseUrl } from './apiBase';
 import { ResData } from './interface';
 const { api_base_url } = apiBaseUrl;
-
-//加密方法
-export function encrypt(word: any) {
-  return CryptoJS.AES.encrypt(word, 'ZSYL20200707ZSYL').toString();
-}
 
 const defOptions: AxiosRequestConfig = {
   baseURL: api_base_url,
@@ -18,9 +12,8 @@ const defOptions: AxiosRequestConfig = {
   withCredentials: false,
   headers: {
     'Access-Control-Allow-Origin': '*',
-    token: '',
-    sign: ''
-  }
+    token: Cookies.get('token'),
+  },
 };
 
 //定义请求类
@@ -39,19 +32,13 @@ class HttpRequest {
     return instance(reqOptions); // 最后返回AxiosPromise
   }
   // 定义这个函数用于添加全局请求和响应拦截逻辑
-  private interceptors(instance: AxiosInstance, url: string) {
+  private interceptors(instance: AxiosInstance, url?: string) {
     // 在这里添加请求拦截
     instance.interceptors.request.use(
       (config: AxiosRequestConfig) => {
-        if (config?.headers) {
-          config.url = encodeURI(url);
-          // 接口请求的所有配置，都在这个config对象中，他的类型是AxiosRequestConfig，你可以看到他有哪些字段
-          // 如果你要修改接口请求配置，需要修改 axios.defaults 上的字段值
-          config.headers.sign = encrypt('qianzai!Qw23e');
-          config.headers.token = config.headers.token
-            ? config.headers.token
-            : Cookies.get('token') || '';
-        }
+        // 接口请求的所有配置，都在这个config对象中，他的类型是AxiosRequestConfig，你可以看到他有哪些字段
+        // 如果你要修改接口请求配置，需要修改 axios.defaults 上的字段值
+        config.headers.token = Cookies.get('sms_token') || '';
 
         return config;
       },
@@ -63,6 +50,11 @@ class HttpRequest {
     instance.interceptors.response.use(
       (res: AxiosResponse) => {
         const { data } = res; // res的类型是AxiosResponse<any>，包含六个字段，其中data是服务端返回的数据
+
+        const { code } = data || {};
+
+        if (code === AxiosReasonseCodeEnum.NOAUTH) {
+        }
 
         return data?.data
           ? res
@@ -83,7 +75,7 @@ class HttpRequest {
           return Promise.resolve({ data: { data: null, code: -4, msg: '' } });
         } else {
           return Promise.reject({
-            data: { data: null, code: 4, msg: JSON.stringify(error) }
+            data: { data: null, code: 4, msg: JSON.stringify(error) },
           });
         }
       }
@@ -96,9 +88,23 @@ class HttpRequest {
     // 这个方法用于合并基础路径配置和接口单独配置
     const _defOptions = cloneDeep({ ...defOptions });
     const _options = cloneDeep({ ...options });
+    console.log(Object.assign(_defOptions, _options));
     return Object.assign(_defOptions, _options);
   }
 }
+
+export const AxiosReasonseCodeEnum = {
+  /**接口响应成功 */
+  OK: 200,
+  /**接口信息校验错误 */
+  ERROR: 400,
+  /**用户信息校验失败 */
+  NOAUTH: 401,
+  /**请求数据验证错误 */
+  VALID_ERROR: 402,
+  /**服务禁止 */
+  FORBIDDEN: 403,
+};
 
 /**
  *
@@ -139,13 +145,13 @@ const cancelRequestObj = {
 
     if (config.cancelRequest) cancelRequestObj.removePending(reqData, true);
     // 设置请求的 cancelToken（设置后就能中途控制取消了）
-    config.cancelToken = new axios.CancelToken(c => {
+    config.cancelToken = new axios.CancelToken((c: any) => {
       // @ts-expect-error
       cancelRequestObj.pending[reqData] = c;
       // @ts-expect-error
       cancelRequestObj.allPendingRequests.push(c);
     });
-  }
+  },
 };
 
 // 取消所有请求
@@ -153,9 +159,5 @@ export const getConfirmation = (meg = '', callback = () => {}) => {
   cancelRequestObj.removeAllPendingRequests();
   callback();
 };
-
-export function catchErrorResponse(response: any) {
-  console.debug('[catchErrorResponse]', response);
-}
 
 export default new HttpRequest();

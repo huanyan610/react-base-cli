@@ -1,12 +1,12 @@
 import React, { Suspense } from 'react';
 import DocumentTitle from 'react-document-title';
-import { Route, Redirect, Switch } from 'react-router-dom';
+import { Route, Switch, Redirect } from 'react-router-dom';
 import { MenuBase } from './config';
 import NotFound from '@/pages/notFound';
 
 const SuspenseComponent = (props: any, extraProps: any, route: MenuBase) => {
   return (
-    <Suspense fallback={<div></div>}>
+    <Suspense fallback={<></>}>
       <route.component {...props} {...extraProps} route={route} />
     </Suspense>
   );
@@ -21,7 +21,7 @@ function renderRoutes(routes: MenuBase[], extraProps = {}, switchProps = {}) {
             key={route.path || i}
             path={route.path}
             exact={route.exact}
-            render={props => {
+            render={(props) => {
               return route.render ? (
                 route.render({ ...props, ...extraProps, route: route })
               ) : (

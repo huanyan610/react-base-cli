@@ -217,7 +217,7 @@ export const isInContainer = (el, container) => {
       top: 0,
       right: window.innerWidth,
       bottom: window.innerHeight,
-      left: 0
+      left: 0,
     };
   } else {
     containerRect = container.getBoundingClientRect();

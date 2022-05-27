@@ -138,7 +138,7 @@ export function msToDate(msec: any) {
     cTime: result3,
     simpleTime: result4,
     tchTime: result5,
-    resourceTime: result6
+    resourceTime: result6,
   };
 
   return result;
@@ -237,7 +237,7 @@ export const judgeWeek = (data: Array<any>) => {
   } else {
     result = {
       connect: '暂无计划',
-      sperate: ['暂无计划']
+      sperate: ['暂无计划'],
     };
   }
 
@@ -271,7 +271,7 @@ export function generateUUID() {
   if (window.performance && typeof window.performance.now === 'function') {
     d += performance.now(); //use high-precision timer if available
   }
-  var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+  var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
     var r = (d + Math.random() * 16) % 16 | 0;
     d = Math.floor(d / 16);
     return (c === 'x' ? r : (r & 0x3) | 0x8).toString(16);
