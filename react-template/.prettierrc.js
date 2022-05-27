@@ -1,6 +1,6 @@
 module.exports = {
   // 箭头函数只有一个参数的时候可以忽略括号
-  arrowParens: 'avoid',
+  arrowParens: 'always',
   // 括号内部不要出现空格
   bracketSpacing: true,
   // 行结束符使用 Unix 格式
@@ -22,5 +22,5 @@ module.exports = {
   // 使用空格缩进
   useTabs: false,
   // 后置逗号，多行对象、数组在最后一行增加逗号
-  trailingComma: 'none'
+  trailingComma: 'es5'
 };

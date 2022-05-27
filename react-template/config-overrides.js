@@ -29,8 +29,22 @@ module.exports = {
     }),
     //配置主题
     addLessLoader({
-      javascriptEnabled: true,
-      modifyVars: './src/styles/antdTheme.js'
+      lessOptions: {
+        modifyVars: {
+          '@primary-color': '#1476FF',
+          '@font-size-lg': '14px',
+          '@border-radius-base': '4px',
+          '@border-radius-sm': '4px',
+          '@zindex-badge': '10',
+          '@input-padding-vertical-base': '4px',
+          '@input-padding-vertical-sm': '1px',
+          '@input-padding-vertical-lg': '8px',
+          '@font-family': 'PingFangSC-Regular, PingFang SC',
+          '@code-family': 'Monaco, Menlo, Ubuntu Mono, Consolas, source-code-pro, monospace',
+          '@layout-header-background': '#FFF'
+        },
+        javascriptEnabled: true
+      }
     })
   )
 };

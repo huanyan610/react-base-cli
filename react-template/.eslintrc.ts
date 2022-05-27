@@ -1,10 +1,7 @@
 const path = require('path');
 module.exports = {
   parser: '@typescript-eslint/parser',
-  extends: [
-    'react-app',
-    "plugin:prettier/recommended"
-  ],
+  extends: ['react-app', 'plugin:prettier/recommended'],
   plugins: ['@typescript-eslint', 'react', 'react-hooks', 'import', 'jsx-a11y', 'html', 'prettier'],
   env: {
     browser: true,
