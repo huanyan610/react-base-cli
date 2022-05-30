@@ -1,20 +1,23 @@
-import store from '@/store';
-import '@/styles/global.scss';
-import '@/styles/normalize.css';
 import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { Provider } from 'react-redux';
 import 'react-app-polyfill/ie9';
 import 'react-app-polyfill/stable';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
+import store from '@/store';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorker from './serviceWorker';
 
-ReactDOM.render(
+import '@/styles/global.scss';
+import '@/styles/normalize.css';
+
+const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
+root.render(
   <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('root')
+    <React.StrictMode>
+      <App />
+    </React.StrictMode>
+  </Provider>
 );
 
 // If you want your app to work offline and load faster, you can change

@@ -1,7 +1,7 @@
 import layouts from '@/layouts/index';
 import React, { lazy, LazyExoticComponent } from 'react';
 
-const { FullLayout = '' } = { ...layouts };
+const { BasicLayout = null } = { ...layouts };
 export interface MenuBase {
   path: string;
   name: string;
@@ -20,9 +20,9 @@ const routes: MenuBase[] = [
   // 菜单相关路由
 
   {
-    path: '/hooksDemo',
+    path: '/',
     name: 'hooksDemo',
-    layout: FullLayout,
+    layout: BasicLayout,
     exact: true,
     component: lazy(() => import('@/pages/hooksDemo')),
   },

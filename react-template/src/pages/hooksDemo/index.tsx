@@ -21,7 +21,7 @@ const HooksDemo: FC = () => {
   const [name3, setName3] = useState<string>('Child3组件');
 
   return (
-    <>
+    <div style={{ padding: 20 }}>
       <Button onClick={() => history.push('/')}>go Back</Button>
       <div>
         <h1>使用memo优化react性能</h1>
@@ -68,7 +68,7 @@ const HooksDemo: FC = () => {
         <h1>useImperativeHandle</h1>
         <UseImperativeHandle></UseImperativeHandle>
       </div>
-    </>
+    </div>
   );
 };
 //创建一个子组件

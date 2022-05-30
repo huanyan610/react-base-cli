@@ -1,0 +1,81 @@
+#BasicLayoutWrap {
+  .ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+    background-color: #f5f7fa;
+    border-right: 1px solid #f0f0f0 !important;
+  }
+
+  .ant-menu-vertical .ant-menu-item,
+  .ant-menu-vertical-left .ant-menu-item,
+  .ant-menu-vertical-right .ant-menu-item,
+  .ant-menu-inline .ant-menu-item,
+  .ant-menu-vertical .ant-menu-submenu-title,
+  .ant-menu-vertical-left .ant-menu-submenu-title,
+  .ant-menu-vertical-right .ant-menu-submenu-title,
+  .ant-menu-inline .ant-menu-submenu-title {
+    height: 48px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding: 0 16px;
+    overflow: hidden;
+    line-height: 48px;
+    text-overflow: ellipsis;
+  }
+
+  .ant-menu-vertical .ant-menu-item:not(:last-child),
+  .ant-menu-vertical-left .ant-menu-item:not(:last-child),
+  .ant-menu-vertical-right .ant-menu-item:not(:last-child),
+  .ant-menu-inline .ant-menu-item:not(:last-child) {
+    margin-bottom: 0px;
+  }
+
+  .ant-menu-vertical > .ant-menu-item,
+  .ant-menu-vertical-left > .ant-menu-item,
+  .ant-menu-vertical-right > .ant-menu-item,
+  .ant-menu-inline > .ant-menu-item,
+  .ant-menu-vertical > .ant-menu-submenu > .ant-menu-submenu-title,
+  .ant-menu-vertical-left > .ant-menu-submenu > .ant-menu-submenu-title,
+  .ant-menu-vertical-right > .ant-menu-submenu > .ant-menu-submenu-title,
+  .ant-menu-inline > .ant-menu-submenu > .ant-menu-submenu-title {
+    height: 48px;
+    line-height: 48px;
+  }
+
+  .ant-menu-sub.ant-menu-inline > .ant-menu-item,
+  .ant-menu-sub.ant-menu-inline > .ant-menu-submenu > .ant-menu-submenu-title {
+    height: 48px;
+    line-height: 48px;
+    list-style-position: inside;
+    list-style-type: disc;
+  }
+
+  .ant-menu-sub.ant-menu-inline {
+    padding: 0;
+    background: #fff;
+    border: 0;
+    border-radius: 0;
+    box-shadow: none;
+  }
+  .ant-menu-inline .ant-menu-selected::after,
+  .ant-menu-inline .ant-menu-item-selected::after {
+    transform: scaleY(1);
+    opacity: 0;
+    transition: transform 0.15s cubic-bezier(0.645, 0.045, 0.355, 1),
+      opacity 0.15s cubic-bezier(0.645, 0.045, 0.355, 1);
+  }
+
+  .ant-layout-sider-light {
+    background: #fff;
+    border-right: 1px solid #e9eaeb;
+  }
+  .ant-layout-sider-light .ant-layout-sider-trigger {
+    color: rgba(0, 0, 0, 0.85);
+    background: #fff;
+    border-right: 1px solid #e9eaeb;
+  }
+
+  .ant-menu-inline,
+  .ant-menu-vertical,
+  .ant-menu-vertical-left {
+    border-right: 0px solid #f0f0f0 !important;
+  }
+}

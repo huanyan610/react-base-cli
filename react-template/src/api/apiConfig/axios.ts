@@ -1,7 +1,7 @@
 import { message } from 'antd';
 import axios, { AxiosInstance, AxiosPromise, AxiosRequestConfig, AxiosResponse } from 'axios'; // 引入axios和定义在node_modules/axios/index.ts文件里的类型声明
 import Cookies from 'js-cookie';
-import { cloneDeep, has, isPlainObject, throttle } from 'lodash';
+import { cloneDeep } from 'lodash';
 import { apiBaseUrl } from './apiBase';
 import { ResData } from './interface';
 const { api_base_url } = apiBaseUrl;
@@ -12,7 +12,7 @@ const defOptions: AxiosRequestConfig = {
   withCredentials: false,
   headers: {
     'Access-Control-Allow-Origin': '*',
-    token: Cookies.get('token'),
+    token: '',
   },
 };
 
@@ -38,7 +38,8 @@ class HttpRequest {
       (config: AxiosRequestConfig) => {
         // 接口请求的所有配置，都在这个config对象中，他的类型是AxiosRequestConfig，你可以看到他有哪些字段
         // 如果你要修改接口请求配置，需要修改 axios.defaults 上的字段值
-        config.headers.token = Cookies.get('sms_token') || '';
+        if (config?.headers)
+          config.headers.token = JSON.parse(Cookies.get('token') as string) || '';
 
         return config;
       },

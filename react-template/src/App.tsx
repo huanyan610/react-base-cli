@@ -2,7 +2,7 @@
 import React from 'react';
 import routes from '@/routes/config';
 import renderRoutes from '@/routes/index';
-import { ConfigProvider, Spin } from 'antd';
+import { ConfigProvider } from 'antd';
 import { BrowserRouter } from 'react-router-dom';
 import moment from 'moment';
 import zhCN from 'antd/es/locale/zh_CN';
