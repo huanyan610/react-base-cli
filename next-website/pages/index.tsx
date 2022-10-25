@@ -1,10 +1,9 @@
-import React from 'react';
+import { Button } from 'antd';
+import { Button as MButton } from 'antd-mobile';
 import type { NextPage } from 'next';
-
 import Head from 'next/head';
 import Image from 'next/image';
-import { Button as MButton } from 'antd-mobile';
-import { Button } from 'antd';
+import React from 'react';
 
 import styles from '../styles/Home.module.css';
 

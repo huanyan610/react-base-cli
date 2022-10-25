@@ -1,4 +1,8 @@
 /node_modules
 /dist
 /lib
+/.eslintrc.js
+/next-less.config.js
+/next-sitemap.config.js
+/next.config.js
 commitlint.config.js

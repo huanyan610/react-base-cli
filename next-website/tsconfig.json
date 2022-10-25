@@ -22,15 +22,18 @@
       "@layouts/*": ["./layouts/*"],
       "@lib/*": ["./lib/*"],
       "@pages/*": ["./pages/*"],
+      "@pageComponents/*": ["./pageComponents/*"],
       "@static/*": ["./static/*"],
       "@store/*": ["./store/*"],
       "@styles/*": ["./styles/*"],
       "@utils/*": ["./utils/*"],
       "@public/*": ["./public/*"],
       "@middleware/*": ["middleware/*"],
-      "@assets/*": ["./assets/*"]
+      "@assets/*": ["./assets/*"],
+      "@data/*": ["./data/*"],
+      "@locales/*": ["./locales/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "utils/asyncHighlight.js"],
-  "exclude": ["node_modules", "lib"]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "utils", "data/routerList"],
+  "exclude": ["node_modules", "lib", "dist"]
 }

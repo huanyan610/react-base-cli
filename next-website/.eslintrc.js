@@ -2,7 +2,16 @@ const path = require('path');
 module.exports = {
   parser: '@typescript-eslint/parser',
   extends: ['next'],
-  plugins: ['@typescript-eslint', 'react', 'react-hooks', 'import', 'jsx-a11y', 'html', 'prettier'],
+  plugins: [
+    '@typescript-eslint',
+    'react',
+    'react-hooks',
+    'simple-import-sort',
+    'import',
+    'jsx-a11y',
+    'html',
+    'prettier',
+  ],
   env: {
     browser: true,
     node: true,
@@ -20,7 +29,17 @@ module.exports = {
     },
   },
   rules: {
-    'prettier/prettier': 'error',
+    'prettier/prettier': [
+      'error',
+      {
+        endOfLine: 'auto',
+      },
+    ],
+    'simple-import-sort/imports': 'error',
+    'simple-import-sort/exports': 'error',
+    'import/first': 'error',
+    'import/newline-after-import': 'error',
+    'import/no-duplicates': 'error',
   },
   settings: {
     react: {

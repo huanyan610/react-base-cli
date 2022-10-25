@@ -380,10 +380,15 @@ export function eightUUID() {
  * @param {url}
  * @returns
  */
-export function winOpen(url: string) {
+export function winOpen(url: string, blank?: boolean) {
   let a = document.createElement('a');
   a.setAttribute('href', url);
-  a.setAttribute('target', '_blank');
+  if (blank) {
+    a.setAttribute('target', '_blank');
+  } else {
+    a.setAttribute('target', '_self');
+  }
+
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
@@ -605,3 +610,9 @@ export function domainToken(key: string, data?: any, opts?: any) {
     },
   };
 }
+
+export const sleep = (time: number) => {
+  return new Promise<void>((resolve, reject) => {
+    if (time) setTimeout(() => resolve(), time);
+  });
+};

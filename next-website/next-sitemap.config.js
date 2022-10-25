@@ -1,15 +1,15 @@
 /** @type {import('next-sitemap').IConfig} */
 
 module.exports = {
-  siteUrl: 'https://card-game.xingzheai.cn',
-  changefreq: 'daily',
-  priority: 0.7,
+  siteUrl: 'https://ting.xingzheai.cn/',
+  changefreq: 'weekly',
+  priority: 0.3,
   sitemapSize: 5000,
   generateRobotsTxt: true,
   exclude: [],
   alternateRefs: [
     {
-      href: 'https://card-game.xingzheai.cn',
+      href: 'https://ting.xingzheai.cn/',
       hreflang: 'zh',
     },
   ],
@@ -21,11 +21,13 @@ module.exports = {
       loc: path, // => this will be exported as http(s)://<config.siteUrl>/<path>
       changefreq: config.changefreq,
       priority: config.priority,
-      lastmod: config.autoLastmod ? new Date().toISOString() : undefined,
+      lastmod: config.autoLastmod
+        ? `${new Date().getFullYear()}-${new Date().getMonth() + 1}-${new Date().getDate()}`
+        : undefined,
       alternateRefs: config.alternateRefs ?? [],
     };
   },
-  additionalPaths: async (config) => [await config.transform(config, '/additional-page')],
+  // additionalPaths: async (config) => [await config.transform(config, '/additional-page')],
   robotsTxtOptions: {
     policies: [
       {
@@ -33,6 +35,6 @@ module.exports = {
         allow: '/',
       },
     ],
-    additionalSitemaps: [],
+    additionalSitemaps: ['https://ting.xingzheai.cn/sitemap-0.xml'],
   },
 };

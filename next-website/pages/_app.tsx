@@ -1,25 +1,29 @@
-import React, { useEffect } from 'react';
-import Cookies from 'js-cookie';
-import localStorage from 'localStorage';
-import moment from 'moment';
-import zh_CN from 'antd/lib/locale-provider/zh_CN';
-import ConfigProvider from 'antd/lib/config-provider';
-import App from 'next/app';
-import { wrapper } from '@store/index';
-import Head from 'next/head';
-import NProgress from 'nprogress';
-import { userTicket, userInfo } from '@api/controller/userController';
-import { useRouter } from 'next/router';
-import { message } from 'antd';
-import 'moment/locale/zh-cn';
-import 'nprogress/nprogress.css';
 import 'antd-mobile/es/global';
-import 'antd/dist/antd.css';
+import 'nprogress/nprogress.css';
 import '../styles/globals.scss';
+import 'react-app-polyfill/ie9';
+import 'react-app-polyfill/stable';
+
+import { wrapper } from '@store/index';
+import { sleep } from '@utils/index';
+import ConfigProvider from 'antd/lib/config-provider';
+import zh_CN from 'antd/lib/locale-provider/zh_CN';
+import { useRouter } from 'next/router';
+import { parse } from 'next-useragent';
+import NProgress from 'nprogress';
+import React, { useEffect, useState } from 'react';
+
 NProgress.configure({ easing: 'ease', showSpinner: false });
-moment.locale('zh-cn');
+
 const MyApp = ({ Component, pageProps }: any) => {
   const router = useRouter();
+  const [ssgua, setUa] = useState<any>({ isMobile: false });
+
+  let ssrua = parse(pageProps?.userAgent);
+
+  useEffect(() => {
+    setUa(parse(window.navigator.userAgent));
+  }, [router]);
   // const userTicketFetch = async () => {
   //   const {
   //     data: { data, code, msg },
@@ -74,13 +78,16 @@ const MyApp = ({ Component, pageProps }: any) => {
       NProgress.start();
     };
     const handleComplete = () => {
-      NProgress.done();
-      window.scrollTo(0, 0);
-      NProgress.remove();
+      sleep(1000).then(() => {
+        NProgress.done();
+        NProgress.remove();
+      });
     };
     const handleStop = () => {
-      NProgress.done();
-      NProgress.remove();
+      sleep(1000).then(() => {
+        NProgress.done();
+        NProgress.remove();
+      });
     };
 
     router.events.on('routeChangeStart', handleStart);
@@ -97,45 +104,16 @@ const MyApp = ({ Component, pageProps }: any) => {
   return (
     <>
       <ConfigProvider locale={zh_CN}>
-        <Head>
-          <link href="/favicon.ico" rel="shortcut icon" />
-          <meta charSet="utf-8" />
-          {/* <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, viewport-fit=cover"
-          /> */}
-          <meta content="width=device-width, initial-scale=1.0" name="viewport"></meta>
-          {/* <meta name="viewport" content="user-scalable=yes" /> */}
-          <meta httpEquiv="X-UA-Compatible" content="IE=Edge,chrome=1" />
-          <meta name="mobile-agent" content="format=html5;" />
-          <meta name="mobile-web-app-capable" content="yes" />
-          <meta name="apple-mobile-web-app-capable" content="yes" />
-          <meta name="apple-touch-fullscreen" content="yes" />
-          <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-          <meta name="robots" content="index,follow" />
-          <meta name="360-site-verification" content="360" />
-          <meta name="renderer" content="webkit" />
-          <meta property="og:title" content="" />
-          <meta property="og:url" content="" />
-          <meta property="og:image" content="/logo.png" />
-          <meta property="og:image:width" content="200" />
-          <meta property="og:image:height" content="200" />
-          <meta property="og:description" content="" />
-        </Head>
-        <Component {...pageProps} />
+        <Component {...pageProps} device={pageProps?.userAgent ? ssrua : ssgua} />
       </ConfigProvider>
     </>
   );
 };
 MyApp.getInitialProps = wrapper.getInitialAppProps((store: any) => async (context: any) => {
-  // Keep in mind that this will be called twice on server, one for page and second for error page
-  store.dispatch({ type: 'APP', payload: 'was set in _app' });
-
   return {
     pageProps: {
-      // https://nextjs.org/docs/advanced-features/custom-app#caveats
-      ...(await App.getInitialProps(context)).pageProps,
-      // Some custom thing for all pages
+      userAgent: context.ctx.req?.headers['user-agent'],
+
       appProp: context.ctx.pathname,
     },
   };
