@@ -1,18 +1,19 @@
 //Test.tsx文件
 import React, {
+  ChangeEvent,
   FC,
-  useState,
-  Fragment,
-  useRef,
-  MutableRefObject,
   forwardRef,
   ForwardRefExoticComponent,
-  Ref,
-  useImperativeHandle,
-  ChangeEvent,
-  SyntheticEvent,
+  Fragment,
   memo,
+  MutableRefObject,
+  Ref,
+  SyntheticEvent,
+  useImperativeHandle,
+  useRef,
+  useState,
 } from 'react';
+
 const Test: FC = (): JSX.Element => {
   const testRef: MutableRefObject<any> = useRef('test');
   const handleClick = (e: SyntheticEvent<HTMLButtonElement>): void => {

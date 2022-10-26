@@ -1,5 +1,7 @@
 import React, { useContext } from 'react';
-import { ProviderContext, providerHoc, reducer, initialReucer } from './store';
+
+import { initialReucer, ProviderContext, providerHoc, reducer } from './store';
+
 function Test(): JSX.Element {
   const { state, asyncActions } = useContext(ProviderContext); //通过ProviderContext这个上下文实例获取到value，解构出
   const { asyncAddaction } = asyncActions; //取出asyncAddaction

@@ -2,8 +2,10 @@ import { message } from 'antd';
 import axios, { AxiosInstance, AxiosPromise, AxiosRequestConfig, AxiosResponse } from 'axios'; // 引入axios和定义在node_modules/axios/index.ts文件里的类型声明
 import Cookies from 'js-cookie';
 import { cloneDeep } from 'lodash';
+
 import { apiBaseUrl } from './apiBase';
 import { ResData } from './interface';
+
 const { api_base_url } = apiBaseUrl;
 
 const defOptions: AxiosRequestConfig = {

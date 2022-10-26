@@ -1,4 +1,5 @@
 import { constants } from './constants';
+
 interface IuserState {
   registerStatus: boolean;
   token: string | undefined;

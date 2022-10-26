@@ -2,17 +2,20 @@
  * @description
  *
  */
-import React, { FC, useEffect, useState } from 'react';
-import styles from './index.module.scss';
-import IconFont from '@/components/IconFont';
 import { Dropdown, message } from 'antd';
-import HeaderDropList from '@/components/UserDropList';
-import { useHistory } from 'react-router';
-import { useSelector } from 'react-redux';
-import { userLogout } from '@/api/apiServer/apiUser';
 import Cookies from 'js-cookie';
+import React, { FC, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router';
+
+import { userLogout } from '@/api/apiServer/apiUser';
+import IconFont from '@/components/IconFont';
+import HeaderDropList from '@/components/UserDropList';
+
+import styles from './index.module.scss';
 
 const classNames = require('classnames');
+
 interface Iprops {}
 
 const UserHeader: FC<Iprops> = (props) => {
@@ -20,7 +23,7 @@ const UserHeader: FC<Iprops> = (props) => {
     return state.userReducer;
   });
 
-  const history = useHistory();
+  const history = useNavigate();
   const [userCenterList, setUserCenterList] = useState<any>([]);
 
   useEffect(() => {
@@ -53,7 +56,7 @@ const UserHeader: FC<Iprops> = (props) => {
       } = resData;
       if (code === 200) {
         Cookies.remove('user_info');
-        history.push('/login');
+        history('/login');
       } else {
         message.error(msg);
       }

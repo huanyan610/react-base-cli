@@ -2,10 +2,13 @@
  * @description
  *
  */
-import React, { FC, CSSProperties } from 'react';
-import { useHistory } from 'react-router';
+import React, { CSSProperties, FC } from 'react';
+import { useNavigate } from 'react-router';
+
 import styles from './index.module.scss';
+
 const classNames = require('classnames');
+
 interface Iprops {
   img?: string;
   style?: CSSProperties;
@@ -14,14 +17,14 @@ interface Iprops {
 
 const Logo: FC<Iprops> = (props) => {
   const { img = '', style = {} } = props;
-  const history = useHistory();
+  const history = useNavigate();
 
   return (
     <div
       className={classNames(styles['LogoWrap'])}
       style={{ ...style }}
       onClick={() => {
-        history.push('/');
+        history('/');
       }}
     >
       <img src={img ? img : ''} alt="logo" />

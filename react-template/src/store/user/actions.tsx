@@ -1,7 +1,9 @@
-import { constants } from './constants';
-import { login } from '@/api/apiServer/apiUser';
 import { message } from 'antd';
+
+import { login } from '@/api/apiServer/apiUser';
+
 import { ThunkResult } from '../interface/index';
+import { constants } from './constants';
 
 //USER_TOKEN
 export const userTokenAction = (payload: any) => ({

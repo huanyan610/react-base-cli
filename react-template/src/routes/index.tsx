@@ -1,48 +1,67 @@
 import React, { Suspense } from 'react';
 import DocumentTitle from 'react-document-title';
-import { Route, Switch, Redirect } from 'react-router-dom';
-import { MenuBase } from './config';
+import { Navigate, Route, Routes } from 'react-router-dom';
+
 import NotFound from '@/pages/notFound';
 
-const SuspenseComponent = (props: any, extraProps: any, route: MenuBase) => {
-  return (
-    <Suspense fallback={<></>}>
-      <route.component {...props} {...extraProps} route={route} />
-    </Suspense>
-  );
-};
+import { MenuBase } from './config';
 
-function renderRoutes(routes: MenuBase[], extraProps = {}, switchProps = {}) {
-  return routes ? (
-    <Switch {...switchProps}>
+interface Iprops {
+  routes?: MenuBase[];
+  extraProps?: {};
+}
+
+function renderRoute(routes: MenuBase[], extraProps = {}) {
+  return (
+    <>
       {routes.map((route: MenuBase, i: number) => {
         return (
           <Route
             key={route.path || i}
             path={route.path}
-            exact={route.exact}
-            render={(props) => {
-              return route.render ? (
-                route.render({ ...props, ...extraProps, route: route })
+            element={
+              route?.replace ? (
+                <Navigate replace to={route.path} />
               ) : (
                 <DocumentTitle title={route.name}>
                   {route.layout ? (
-                    <route.layout route={route}>
-                      {SuspenseComponent(props, extraProps, route)}
+                    <route.layout route={route} {...extraProps}>
+                      {SuspenseComponent(route, extraProps)}
                     </route.layout>
                   ) : (
-                    SuspenseComponent(props, extraProps, route)
+                    SuspenseComponent(route, extraProps)
                   )}
                 </DocumentTitle>
-              );
-            }}
-          />
+              )
+            }
+          >
+            {route?.children ? renderRoute(route?.children, extraProps) : <></>}
+          </Route>
         );
       })}
-      <Route path="/notFound" component={NotFound} />
-      <Redirect to="/notFound" />
-    </Switch>
-  ) : null;
+    </>
+  );
 }
 
-export default renderRoutes;
+const SuspenseComponent = (route: MenuBase, extraProps: any) => {
+  return (
+    <Suspense fallback={<></>}>
+      <route.element route={route} {...extraProps} />
+    </Suspense>
+  );
+};
+
+function RoutesElement(props: Iprops) {
+  const { routes = [], extraProps } = props;
+  console.log('RoutesElement', routes);
+  return (
+    <Routes>
+      {routes ? renderRoute(routes, extraProps) : <></>}
+      <Route path="/" element={<Navigate replace to={routes[0]?.path} />} />
+      <Route path="/notFound" element={<NotFound />} />
+      <Route path="*" element={<Navigate replace to="/notFound" />} />
+    </Routes>
+  );
+}
+
+export default RoutesElement;

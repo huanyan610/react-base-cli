@@ -1,22 +1,22 @@
+import 'react-app-polyfill/ie9';
+import 'react-app-polyfill/stable';
+import '@/styles/normalize.css';
+import '@/styles/global.scss';
+
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from 'react-redux';
-import 'react-app-polyfill/ie9';
-import 'react-app-polyfill/stable';
+
 import store from '@/store';
+
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import * as serviceWorker from './serviceWorker';
 
-import '@/styles/global.scss';
-import '@/styles/normalize.css';
-
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(
   <Provider store={store}>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
+    <App />
   </Provider>
 );
 

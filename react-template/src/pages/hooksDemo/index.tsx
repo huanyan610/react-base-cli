@@ -1,6 +1,7 @@
-import React, { FC, useState, memo, useCallback, useMemo } from 'react';
-import { useHistory } from 'react-router-dom';
 import { Button } from 'antd';
+import React, { FC, memo, useCallback, useMemo, useState } from 'react';
+import { useNavigate } from 'react-router';
+
 import ProviderHoc from './providerHoc';
 import UseImperativeHandle from './useImperativeHandle';
 //在TestChild子组件使用之前，使用memo包裹一下
@@ -8,7 +9,7 @@ const MemoTestChild1 = memo(Child1); //对子组件进行处理
 const MemoTestChild2 = memo(Child2); //对子组件进行处理
 const MemoTestChild3 = memo(Child3); //对子组件进行处理
 const HooksDemo: FC = () => {
-  const history = useHistory();
+  const history = useNavigate();
 
   const [count1, setCount1] = useState<number>(1);
 
@@ -22,7 +23,7 @@ const HooksDemo: FC = () => {
 
   return (
     <div style={{ padding: 20 }}>
-      <Button onClick={() => history.push('/')}>go Back</Button>
+      <Button onClick={() => history('/')}>go Back</Button>
       <div>
         <h1>使用memo优化react性能</h1>
         <h2>{count1}</h2>

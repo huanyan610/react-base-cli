@@ -1,19 +1,20 @@
 .LogoWrap {
+  display: flex;
   width: 220px;
   height: 60px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  font-family: PingFangSC-Medium, 'PingFang SC';
   font-size: 14px;
-  font-family: PingFangSC-Medium, PingFang SC;
   font-weight: 500;
   color: #333840;
+  justify-content: center;
+  align-items: center;
   border-right: 1px solid #e9eaeb;
+
   > img {
+    display: block;
     width: 24px;
     height: 24px;
     margin-right: 8px;
-    display: block;
     cursor: pointer;
   }
 }

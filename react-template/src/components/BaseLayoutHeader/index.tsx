@@ -1,14 +1,17 @@
-import React, { FC, CSSProperties } from 'react';
-import styles from './index.module.scss';
+import { Select } from 'antd';
+import React, { CSSProperties, FC } from 'react';
+import { useSelector } from 'react-redux';
 
+import IconFont from '@/components/IconFont';
 import Logo from '@/components/Logo';
 import UserHeader from '@/components/UserHeader';
-import { useSelector } from 'react-redux';
-import IconFont from '@/components/IconFont';
-import { Select } from 'antd';
+
+import styles from './index.module.scss';
+
 let { Option } = Select;
 
 const classNames = require('classnames');
+
 interface Iprops {
   img?: string;
   style?: CSSProperties;

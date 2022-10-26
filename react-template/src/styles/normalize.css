@@ -10,7 +10,7 @@
 
 html {
   line-height: 1.15; /* 1 */
-  -webkit-text-size-adjust: 100%; /* 2 */
+  text-size-adjust: 100%; /* 2 */
 }
 
 /* Sections
@@ -21,8 +21,8 @@ html {
  */
 
 body {
-  margin: 0;
   padding: 0;
+  margin: 0;
 }
 
 /**
@@ -34,9 +34,9 @@ main {
 }
 
 ul li {
+  padding: 0;
+  margin: 0;
   list-style: none;
-  padding: 0px;
-  margin: 0px;
 }
 
 /**
@@ -45,8 +45,8 @@ ul li {
  */
 
 h1 {
-  font-size: 2em;
   margin: 0.67em 0;
+  font-size: 2em;
 }
 
 /* Grouping content
@@ -69,7 +69,7 @@ hr {
  */
 
 pre {
-  font-family: monospace, monospace; /* 1 */
+  font-family: monospace; /* 1 */
   font-size: 1em; /* 2 */
 }
 
@@ -112,7 +112,7 @@ strong {
 code,
 kbd,
 samp {
-  font-family: monospace, monospace; /* 1 */
+  font-family: monospace; /* 1 */
   font-size: 1em; /* 2 */
 }
 
@@ -131,9 +131,9 @@ small {
 
 sub,
 sup {
+  position: relative;
   font-size: 75%;
   line-height: 0;
-  position: relative;
   vertical-align: baseline;
 }
 
@@ -169,10 +169,10 @@ input,
 optgroup,
 select,
 textarea {
+  margin: 0; /* 2 */
   font-family: inherit; /* 1 */
   font-size: 100%; /* 1 */
   line-height: 1.15; /* 1 */
-  margin: 0; /* 2 */
 }
 
 /**
@@ -205,7 +205,7 @@ button,
 [type='button'],
 [type='reset'],
 [type='submit'] {
-  -webkit-appearance: button;
+  appearance: button;
 }
 
 /**
@@ -247,12 +247,12 @@ fieldset {
  */
 
 legend {
-  box-sizing: border-box; /* 1 */
-  color: inherit; /* 2 */
   display: table; /* 1 */
   max-width: 100%; /* 1 */
   padding: 0; /* 3 */
+  color: inherit; /* 2 */
   white-space: normal; /* 1 */
+  box-sizing: border-box; /* 1 */
 }
 
 /**
@@ -297,7 +297,7 @@ textarea {
  */
 
 [type='search'] {
-  -webkit-appearance: textfield; /* 1 */
+  appearance: textfield; /* 1 */
   outline-offset: -2px; /* 2 */
 }
 
@@ -306,7 +306,7 @@ textarea {
  */
 
 [type='search']::-webkit-search-decoration {
-  -webkit-appearance: none;
+  appearance: none;
 }
 
 /**
@@ -315,7 +315,7 @@ textarea {
  */
 
 ::-webkit-file-upload-button {
-  -webkit-appearance: button; /* 1 */
+  appearance: button; /* 1 */
   font: inherit; /* 2 */
 }
 

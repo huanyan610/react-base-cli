@@ -1,18 +1,20 @@
-import React, { useEffect, useState } from 'react';
-
-import styles from './BasicLayout.module.scss';
-import BaseLayoutHeader from '@/components/BaseLayoutHeader';
-import classNames from 'classnames';
-import { Menu } from 'antd';
-import type { MenuProps } from 'antd';
-import { useHistory } from 'react-router';
-import IconFont from '@/components/IconFont';
 import './index.scss';
 
+import type { MenuProps } from 'antd';
+import { Menu } from 'antd';
+import classNames from 'classnames';
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
+
+import BaseLayoutHeader from '@/components/BaseLayoutHeader';
+import IconFont from '@/components/IconFont';
+
+import styles from './BasicLayout.module.scss';
+
 const BasicLayout = (props: any) => {
-  const history = useHistory();
+  const history = useNavigate();
   const onClick: MenuProps['onClick'] = (e) => {
-    history.push(`/${e.key}`);
+    history(`/${e.key}`);
   };
   type MenuItem = Required<MenuProps>['items'][number];
 

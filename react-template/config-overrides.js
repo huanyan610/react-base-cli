@@ -1,4 +1,10 @@
-const { override, fixBabelImports, addLessLoader, addWebpackAlias } = require('customize-cra');
+const {
+  override,
+  fixBabelImports,
+  addLessLoader,
+  adjustStyleLoaders,
+  addWebpackAlias,
+} = require('customize-cra');
 const path = require('path');
 
 // 修改path目录
@@ -32,20 +38,22 @@ module.exports = {
       // 如果使用less-loader@5，请移除 lessOptions 这一级直接配置选项。
       lessOptions: {
         modifyVars: {
-          '@primary-color': '#1476FF',
+          '@primary-color': '#266DFF',
           '@font-size-lg': '14px',
           '@border-radius-base': '4px',
-          '@border-radius-sm': '4px',
-          '@zindex-badge': '10',
-          '@input-padding-vertical-base': '4px',
-          '@input-padding-vertical-sm': '1px',
-          '@input-padding-vertical-lg': '8px',
+          '@border-radius-sm': '2px',
           '@font-family': 'PingFangSC-Regular, PingFang SC',
           '@code-family': 'Monaco, Menlo, Ubuntu Mono, Consolas, source-code-pro, monospace',
-          '@layout-header-background': '#FFF',
+        },
+        lessOptions: {
+          strictMath: true,
         },
         javascriptEnabled: true,
       },
+    }),
+    adjustStyleLoaders(({ use: [, , postcss] }) => {
+      const postcssOptions = postcss.options;
+      postcss.options = { postcssOptions };
     })
   ),
 };
