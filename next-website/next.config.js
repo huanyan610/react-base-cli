@@ -13,36 +13,11 @@ const withTM = require('next-transpile-modules')([
 ]);
 const withImages = require('next-images');
 
-// const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const isProd = process.env.NEXT_PUBLIC_ENV === 'production';
-// const isAnalyzer = process.env.NEXT_PUBLIC_ENV === 'analyzer';
 
-let cdnPublicPath = '//static2.xingzheai.cn/dingting-website/';
-// let ossProject = '//static2.xingzheai.cn/qianzai-website';
-// if (REACT_APP_ENV === 'qa') {
-//   cdnPublicPath = `${ossProject}/`;
-// } else if (REACT_APP_ENV === 'prod') {
-//   cdnPublicPath = `${ossProject}/prod/`;
-// } else if (REACT_APP_ENV === 'dev') {
-//   cdnPublicPath = `${ossProject}/dev/`;
-// } else if (REACT_APP_ENV === 'pre') {
-//   cdnPublicPath = `${ossProject}/pre/`;
-// } else if (REACT_APP_ENV === 'demo') {
-//   cdnPublicPath = `${ossProject}/demo/`;
-// }
+let cdnPublicPath = '';
 
 const resolveApp = (_path) => path.resolve(__dirname, _path);
-
-// const path_config = () => (config) => {
-//   // 非打包环境下
-//   config.devtool = false;
-//   // 修改path目录
-//   paths.appBuild = path.join(path.dirname(paths.appBuild), 'dist');
-//   config.output.path = path.join(path.dirname(config.output.path), 'dist');
-//   config.output.publicPath = cdnPublicPath;
-
-//   return config;
-// };
 
 module.exports = withPlugins([[withCss], [withImages], [withAntdLess], [withTM]], {
   reactStrictMode: true,
@@ -129,7 +104,6 @@ module.exports = withPlugins([[withCss], [withImages], [withAntdLess], [withTM]]
       //   );
     }
 
-    // config = path_config(config);
     return config;
   },
   // 手动修改webpackDevMiddleware配置
@@ -142,7 +116,6 @@ module.exports = withPlugins([[withCss], [withImages], [withAntdLess], [withTM]]
     REACT_APP_ENV: process.env.REACT_APP_ENV,
     REACT_APP_URL: process.env.REACT_APP_URL,
     REACT_APP_API_URL: process.env.REACT_APP_API_URL,
-    REACT_APP_API_URL_1: process.env.REACT_APP_API_URL_1,
   },
   // 只有在服务端渲染时才会获取的配置
   serverRuntimeConfig: {
