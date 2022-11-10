@@ -4,7 +4,7 @@ import '../styles/globals.scss';
 import 'react-app-polyfill/ie9';
 import 'react-app-polyfill/stable';
 
-import { wrapper } from '@store/index';
+import { wrapper } from '@redux/store';
 import { sleep } from '@utils/index';
 import ConfigProvider from 'antd/lib/config-provider';
 import zh_CN from 'antd/lib/locale-provider/zh_CN';

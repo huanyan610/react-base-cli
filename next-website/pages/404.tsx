@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { FC } from 'react';
 import { Button } from 'antd';
+import React, { FC } from 'react';
+
 const Custom404: FC = () => {
   const onClick = () => {
     location.replace('/');

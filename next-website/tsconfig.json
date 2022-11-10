@@ -25,6 +25,7 @@
       "@pageComponents/*": ["./pageComponents/*"],
       "@static/*": ["./static/*"],
       "@store/*": ["./store/*"],
+      "@redux/*": ["./redux/*"],
       "@styles/*": ["./styles/*"],
       "@utils/*": ["./utils/*"],
       "@public/*": ["./public/*"],

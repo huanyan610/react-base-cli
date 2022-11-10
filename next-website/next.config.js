@@ -50,6 +50,7 @@ module.exports = withPlugins([[withCss], [withImages], [withAntdLess], [withTM]]
       '@interfaces': resolveApp('./interfaces'),
       '@layouts': resolveApp('./layouts'),
       '@store': resolveApp('./store'),
+      '@redux': resolveApp('./redux'),
       '@styles': resolveApp('./styles'),
       '@utils': resolveApp('./utils'),
       '@static': resolveApp('./static'),
