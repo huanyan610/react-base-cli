@@ -78,7 +78,7 @@ class HttpRequest {
           return Promise.resolve({ data: { data: null, code: -4, msg: '' } });
         } else {
           return Promise.reject({
-            data: { data: null, code: 4, msg: JSON.stringify(error) },
+            data: { data: null, code: -5, msg: JSON.stringify(error) },
           });
         }
       }

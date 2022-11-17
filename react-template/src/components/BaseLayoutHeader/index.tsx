@@ -1,3 +1,4 @@
+import { CaretDownOutlined } from '@ant-design/icons';
 import { Select } from 'antd';
 import React, { CSSProperties, FC } from 'react';
 import { useSelector } from 'react-redux';
@@ -27,15 +28,15 @@ const BaseLayoutHeader: FC<Iprops> = (props) => {
   return (
     <div className={classNames(styles['BaseLayoutHeaderWrap'], 'flex', 'flex-align-center')}>
       <Logo />
-      <div className="header-game" style={{ marginLeft: 12 }}>
+      <div style={{ marginLeft: 12 }}>
         <Select
           value={1}
           dropdownStyle={{ minWidth: 156 }}
           placeholder="请选择项目"
-          className="content-select"
+          className="project-select"
           optionFilterProp="label"
           bordered={false}
-          suffixIcon={<IconFont type="" style={{ fontSize: 12, color: 'rgb(103,104,115)' }} />}
+          suffixIcon={<CaretDownOutlined style={{ fontSize: 12, color: 'rgb(103,104,115)' }} />}
           onChange={(value: any) => {
             console.log(value);
           }}

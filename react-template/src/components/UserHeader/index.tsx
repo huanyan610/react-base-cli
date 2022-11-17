@@ -2,6 +2,7 @@
  * @description
  *
  */
+import { CaretDownOutlined, ExportOutlined, UserOutlined } from '@ant-design/icons';
 import { Dropdown, message } from 'antd';
 import Cookies from 'js-cookie';
 import React, { FC, useEffect, useState } from 'react';
@@ -9,7 +10,6 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 
 import { userLogout } from '@/api/apiServer/apiUser';
-import IconFont from '@/components/IconFont';
 import HeaderDropList from '@/components/UserDropList';
 
 import styles from './index.module.scss';
@@ -29,9 +29,7 @@ const UserHeader: FC<Iprops> = (props) => {
   useEffect(() => {
     setUserCenterList([
       {
-        icon: (
-          <IconFont type="iconheader_exit" style={{ fontSize: 22, color: '#363966' }}></IconFont>
-        ),
+        icon: <ExportOutlined style={{ fontSize: 14, color: '#363966' }} />,
         name: '退出登录',
         key: 1,
       },
@@ -64,7 +62,7 @@ const UserHeader: FC<Iprops> = (props) => {
   };
 
   return (
-    <div className={classNames(styles['UserHeaderWrap'])}>
+    <div className={classNames(styles['wrap'])}>
       <div
         className={classNames(
           styles['nav-right'],
@@ -81,13 +79,9 @@ const UserHeader: FC<Iprops> = (props) => {
               style={{ height: 60, cursor: 'pointer', color: '#333840' }}
               onClick={(e) => e.preventDefault()}
             >
-              <IconFont type="icon-list" style={{ fontSize: 28, marginRight: 8 }} />
+              <UserOutlined style={{ fontSize: 16, marginRight: 8 }} />
               {userInfo?.user_name || '管理员'}
-              <IconFont
-                className={classNames(styles['icon'])}
-                type="iconarrow_linear"
-                style={{ fontSize: 12, marginLeft: 8 }}
-              />
+              <CaretDownOutlined type="iconarrow_linear" style={{ fontSize: 12, marginLeft: 8 }} />
             </span>
           </Dropdown>
         </span>
