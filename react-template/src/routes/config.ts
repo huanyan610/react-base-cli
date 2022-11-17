@@ -20,6 +20,12 @@ const routes: MenuBase[] = [
   // 菜单相关路由
   {
     path: '/',
+    name: 'home',
+    layout: BasicLayout,
+    element: lazy(() => import('@/pages/home')),
+  },
+  {
+    path: '/hooksDemo',
     name: 'hooksDemo',
     layout: BasicLayout,
     element: lazy(() => import('@/pages/hooksDemo')),

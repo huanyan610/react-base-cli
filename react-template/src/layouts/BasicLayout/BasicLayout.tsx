@@ -35,14 +35,13 @@ const BasicLayout = (props: any) => {
   }
 
   const items: MenuProps['items'] = [
-    getItem('sub1', 'sub1', <IconFont type="" style={{ fontSize: 16, color: '#667180' }} />, [
-      getItem('sub1-1', 'sub1-1'),
-      getItem('sub1-2', 'sub1-2'),
-      getItem('sub1-3', 'sub1-3'),
-    ]),
-    getItem('sub2', 'sub2', <IconFont type="" style={{ fontSize: 16, color: '#667180' }} />, [
-      getItem('sub2-1', 'sub2-1'),
-    ]),
+    getItem('Home', '', <IconFont type="" style={{ fontSize: 16, color: '#667180' }} />),
+    getItem(
+      'hooksDemo',
+      'hooksDemo',
+      <IconFont type="" style={{ fontSize: 16, color: '#667180' }} />,
+      [getItem('sub2-1', 'sub2-1')]
+    ),
     getItem('sub3', 'sub3', <IconFont type="" style={{ fontSize: 16, color: '#667180' }} />, [
       getItem('sub3-1', 'sub3-1'),
       getItem('sub3-2', 'sub3-2'),
@@ -55,15 +54,16 @@ const BasicLayout = (props: any) => {
     let path = window.location.pathname;
     if (path !== '/') {
       let pathName = path.slice(1);
-      let sub = 'sub1';
-      items.forEach((item: any) => {
-        item.children.forEach((child: any) => {
+
+      let sub = 'hooksDemo';
+      items?.forEach((item: any) => {
+        item?.children?.forEach((child: any) => {
           if (child.key === pathName) {
             sub = item.key;
           }
         });
       });
-      if (sub !== 'sub1') {
+      if (sub !== '') {
         setSubName(sub);
       }
       setChildName(pathName);
