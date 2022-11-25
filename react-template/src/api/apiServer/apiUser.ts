@@ -4,11 +4,11 @@ import Axios from '@/api/apiConfig/axios';
  * @description 用户登录
  * @return {Object} 返回值描述
  */
-export const login = async (req: any) => {
+export const login = async (data?: any) => {
   try {
     return await Axios.request({
       url: ``,
-      data: req,
+      data: data,
       method: 'POST',
     });
   } catch (e) {
@@ -24,6 +24,7 @@ export const userInfo = async (data?: any) => {
   try {
     return await Axios.request({
       url: ``,
+      params: data,
       method: 'GET',
     });
   } catch (e) {
@@ -39,6 +40,7 @@ export const userLogout = async (data?: any) => {
   try {
     return await Axios.request({
       url: ``,
+      params: data,
       method: 'GET',
     });
   } catch (e) {

@@ -15,9 +15,7 @@ interface Iprops {
 }
 
 const Home: FC<Iprops> = (props) => {
-  const { data } = props;
-
-  return <div className={classNames(styles['wrap'])}>666666</div>;
+  return <div className={classNames(styles['wrap'])}>6666</div>;
 };
 
 export default Home;

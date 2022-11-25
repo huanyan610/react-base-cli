@@ -1,7 +1,6 @@
 import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit';
 
-import infoReducer from './info/slice';
-import userReducer from './user/slice';
+import user from './user/slice';
 
 let loggerMiddleware: any = undefined;
 
@@ -13,8 +12,7 @@ if (process.env.NODE_ENV !== `production`) {
 
 const store = configureStore({
   reducer: {
-    info: infoReducer,
-    user: userReducer,
+    user,
   },
   middleware: (getDefaultMiddleware) =>
     process.env.NODE_ENV === 'production' || !loggerMiddleware

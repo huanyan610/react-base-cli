@@ -1,20 +1,20 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
-import 'moment/locale/zh-cn';
 import './App.scss';
 
 import { ConfigProvider } from 'antd';
-import zhCN from 'antd/es/locale/zh_CN';
-import moment from 'moment';
+import zhCN from 'antd/locale/zh_CN';
 import { BrowserRouter } from 'react-router-dom';
 
 import routes from '@/routes/config';
 import RenderRoute from '@/routes/index';
 
-moment.locale('zh-cn');
-
 function App() {
   return (
-    <ConfigProvider locale={zhCN}>
+    <ConfigProvider
+      locale={zhCN}
+      theme={{
+        token: { borderRadius: 4 },
+      }}
+    >
       <BrowserRouter>
         <RenderRoute routes={routes} extraProps={{}}></RenderRoute>
       </BrowserRouter>

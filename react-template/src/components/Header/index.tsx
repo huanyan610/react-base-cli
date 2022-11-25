@@ -3,8 +3,6 @@ import { Select } from 'antd';
 import React, { CSSProperties, FC } from 'react';
 import { useSelector } from 'react-redux';
 
-import IconFont from '@/components/IconFont';
-import Logo from '@/components/Logo';
 import UserHeader from '@/components/UserHeader';
 
 import styles from './index.module.scss';
@@ -19,15 +17,13 @@ interface Iprops {
   logoStyle?: CSSProperties;
 }
 
-const BaseLayoutHeader: FC<Iprops> = (props) => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+const Header: FC<Iprops> = (props) => {
   const { userInfo } = useSelector((state: any) => {
     return state.userReducer;
   });
 
   return (
-    <div className={classNames(styles['BaseLayoutHeaderWrap'], 'flex', 'flex-align-center')}>
-      <Logo />
+    <div className={classNames(styles['wrap'], 'flex', 'flex-align-center')}>
       <div style={{ marginLeft: 12 }}>
         <Select
           value={1}
@@ -52,4 +48,4 @@ const BaseLayoutHeader: FC<Iprops> = (props) => {
   );
 };
 
-export default BaseLayoutHeader;
+export default Header;

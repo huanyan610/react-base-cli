@@ -28,7 +28,6 @@ const Logo: FC<Iprops> = (props) => {
       }}
     >
       <img src={img ? img : ''} alt="logo" />
-      LOGO
     </div>
   );
 };
