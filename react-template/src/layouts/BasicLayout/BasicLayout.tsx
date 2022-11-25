@@ -89,7 +89,6 @@ const BasicLayout = (props: any) => {
         >
           <Logo />
           <Menu
-            style={{ height: 'calc(100vh - 107px)', overflowY: 'auto' }}
             key={childName}
             onClick={onClickMenu}
             defaultSelectedKeys={[childName]}
