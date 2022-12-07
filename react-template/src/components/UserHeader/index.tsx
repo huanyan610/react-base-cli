@@ -19,8 +19,8 @@ const classNames = require('classnames');
 interface Iprops {}
 
 const UserHeader: FC<Iprops> = (props) => {
-  const { userInfo = {} } = useSelector((state: any) => {
-    return state.userReducer;
+  const { id, name } = useSelector((state: any) => {
+    return state.user;
   });
 
   const history = useNavigate();
@@ -34,7 +34,7 @@ const UserHeader: FC<Iprops> = (props) => {
         key: 1,
       },
     ]);
-  }, [userInfo?.user_id]);
+  }, [id]);
 
   const onSelect = async (item: any, index: number) => {
     switch (item.key) {
@@ -80,7 +80,7 @@ const UserHeader: FC<Iprops> = (props) => {
               onClick={(e) => e.preventDefault()}
             >
               <UserOutlined style={{ fontSize: 16, marginRight: 8 }} />
-              {userInfo?.user_name || '管理员'}
+              {name || '管理员'}
               <CaretDownOutlined type="iconarrow_linear" style={{ fontSize: 12, marginLeft: 8 }} />
             </span>
           </Dropdown>

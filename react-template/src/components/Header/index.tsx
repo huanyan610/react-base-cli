@@ -3,6 +3,7 @@ import { Select } from 'antd';
 import React, { CSSProperties, FC } from 'react';
 import { useSelector } from 'react-redux';
 
+import Logo from '@/components/Logo';
 import UserHeader from '@/components/UserHeader';
 
 import styles from './index.module.scss';
@@ -18,12 +19,13 @@ interface Iprops {
 }
 
 const Header: FC<Iprops> = (props) => {
-  const { userInfo } = useSelector((state: any) => {
-    return state.userReducer;
+  const { id } = useSelector((state: any) => {
+    return state.user;
   });
 
   return (
     <div className={classNames(styles['wrap'], 'flex', 'flex-align-center')}>
+      <Logo />
       <div style={{ marginLeft: 12 }}>
         <Select
           value={1}

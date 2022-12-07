@@ -1,12 +1,14 @@
+import { CheckCircleOutlined, SettingOutlined } from '@ant-design/icons';
 import type { MenuProps } from 'antd';
 import { Layout, Menu } from 'antd';
 import classNames from 'classnames';
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router';
 
 import Header from '@/components/Header';
 import IconFont from '@/components/IconFont';
-import Logo from '@/components/Logo';
+import { collapsedAction, openKeyAction, selectKeyAction } from '@/redux/baseLayout/slice';
 
 import styles from './BasicLayout.module.scss';
 
@@ -32,15 +34,16 @@ function getItem(
 
 const BasicLayout = (props: any) => {
   const { children } = props;
+  const { collapsed, selectKeys, openKeys } = useSelector((state: any) => state.baseLayout);
 
   const items: MenuProps['items'] = useMemo(
     () => [
-      getItem('Home', '', <IconFont type="" style={{ fontSize: 16, color: '#667180' }} />),
+      getItem('home', '/home', <CheckCircleOutlined style={{ fontSize: 16, color: '#667180' }} />),
       getItem(
         'hooksDemo',
-        'hooksDemo',
-        <IconFont type="" style={{ fontSize: 16, color: '#667180' }} />,
-        [getItem('hooksDemo', 'hooksDemo')]
+        '/hooksDemo',
+        <SettingOutlined style={{ fontSize: 16, color: '#667180' }} />,
+        [getItem('hooksDemo', '/hooksDemo', null)]
       ),
       getItem('sub3', 'sub3', <IconFont type="" style={{ fontSize: 16, color: '#667180' }} />, [
         getItem('sub3-1', 'sub3-1'),
@@ -50,57 +53,32 @@ const BasicLayout = (props: any) => {
     []
   );
 
-  const navigate = useNavigate();
+  const router = useNavigate();
   const location = useLocation();
-  let [subName, setSubName] = useState('');
-  let [childName, setChildName] = useState('');
-  const [collapsed, setCollapsed] = useState(false);
+  const dispatch = useDispatch();
+
+  const onOpen = (value: any) => {
+    console.log(openKeys);
+    dispatch(openKeyAction(value));
+  };
 
   const onClickMenu: MenuProps['onClick'] = (e) => {
-    navigate(`/${e.key}`);
+    router(`${e.key}`);
   };
 
   useEffect(() => {
-    let path = window.location.pathname;
-    let pathName = path.slice(1);
-    let sub = '';
-    items?.forEach((item: any) => {
-      item?.children?.forEach((child: any) => {
-        if (child.key === pathName) {
-          sub = item.key;
-        }
-      });
-    });
+    let names = location?.pathname?.split('/');
+    console.log(router);
+    console.log(names, location?.pathname);
+    if (location?.pathname) {
+      if (!openKeys) {
+        dispatch(openKeyAction([`/${names[1]}`]));
+      }
 
-    if (sub !== '') {
-      setSubName(sub);
+      dispatch(selectKeyAction(location?.pathname));
     }
-    setChildName(pathName);
-  }, [location.pathname, items]);
-
-  const SiderCb = useCallback(() => {
-    return (
-      <div className={styles['sider']}>
-        <Sider
-          collapsible
-          collapsed={collapsed}
-          onCollapse={(value) => setCollapsed(value)}
-          width={256}
-        >
-          <Logo />
-          <Menu
-            key={childName}
-            onClick={onClickMenu}
-            defaultSelectedKeys={[childName]}
-            defaultOpenKeys={[subName]}
-            mode="inline"
-            items={items}
-          />
-        </Sider>
-      </div>
-    );
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [childName, subName, collapsed, items]);
+  }, [location?.pathname, collapsed, openKeys, dispatch]);
 
   const MainCb = useCallback(() => {
     return <div className={styles['main']}>{children}</div>;
@@ -108,10 +86,28 @@ const BasicLayout = (props: any) => {
   }, [location?.pathname]);
 
   return (
-    <div className={classNames(styles['wrap'], 'flex')} id="BasicLayoutWrap">
-      <SiderCb />
+    <div className={classNames(styles['wrap'])} id="BasicLayoutWrap">
+      <Header />
       <section className={styles['content']}>
-        <Header />
+        <div className={styles['sider']}>
+          <Sider
+            collapsible
+            collapsed={collapsed}
+            onCollapse={(value) => dispatch(collapsedAction(value))}
+            width={256}
+          >
+            <Menu
+              style={{ height: 'calc(100vh - 107px)', overflowY: 'auto' }}
+              mode="inline"
+              onOpenChange={onOpen}
+              onClick={onClickMenu}
+              defaultOpenKeys={openKeys}
+              selectedKeys={selectKeys}
+              openKeys={openKeys}
+              items={items}
+            />
+          </Sider>
+        </div>
         <MainCb />
       </section>
     </div>
