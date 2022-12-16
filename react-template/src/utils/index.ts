@@ -1,3 +1,4 @@
+/* eslint-disable no-delete-var */
 /*
  * @Author: your name
  * @Date: 2020-01-16 16:40:21
@@ -6,6 +7,8 @@
  * @Description: In User Settings Edit
  * @FilePath: \DDcodeEdu-React\src\utils\index.ts
  */
+
+import _ from 'lodash';
 
 // 获取url的参数
 export const queryString = () => {
@@ -248,18 +251,61 @@ export const judgeWeek = (data: Array<any>) => {
  * @desc build a get request(构建一个带hash值的get请求)
  * @param
  */
-export function buildGET(basePort: any, json: any) {
+export function buildGET(basePort?: any, json?: any) {
   let buildGet = basePort;
   let fistNumber = 0;
+  let _json = '';
   for (var key in json) {
     let littlePort = '';
-    if (json[key] !== null && json[key] !== 'null') {
+    if (isEmpty(json[key])) {
+      if (typeof json[key] === 'object') {
+        _json = JSON.stringify(json[key]);
+      } else {
+        _json = json[key];
+      }
       if (fistNumber === 0) {
-        littlePort = '?' + key + '=' + json[key];
+        littlePort = '?' + key + '=' + _json;
         fistNumber++;
       } else {
-        littlePort = '&' + key + '=' + json[key];
+        littlePort = '&' + key + '=' + _json;
       }
+      buildGet += littlePort;
+    }
+  }
+  return String(buildGet);
+}
+
+/**
+ * @desc build a get request(构建一个带hash值的get请求)
+ * @param
+ */
+export function buildUrl(basePort?: any, obj?: any, delKeys?: any) {
+  let _obj = _.cloneDeep(obj);
+  let _delKeys = _.cloneDeep(delKeys);
+
+  _delKeys?.forEach((item: any) => {
+    delete _obj[item];
+  });
+
+  let buildGet = basePort;
+  let fistNumber = 0;
+  let _json = '';
+  for (let key in _obj) {
+    let littlePort = '';
+    if (!isEmpty(_obj[key])) {
+      if (typeof _obj[key] === 'object') {
+        _json = JSON.stringify(_obj[key]);
+      } else {
+        _json = _obj[key];
+      }
+
+      if (fistNumber === 0) {
+        littlePort = key + '=' + _json;
+        fistNumber++;
+      } else {
+        littlePort = ',' + key + '=' + _json;
+      }
+
       buildGet += littlePort;
     }
   }
@@ -277,21 +323,6 @@ export function generateUUID() {
     return (c === 'x' ? r : (r & 0x3) | 0x8).toString(16);
   });
   return uuid;
-}
-
-/**
- * 模拟window.open()
- * @export
- * @param {url}
- * @returns
- */
-export function winOpen(url: string) {
-  let a = document.createElement('a');
-  a.setAttribute('href', url);
-  a.setAttribute('target', '_blank');
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
 }
 
 class Validate {
@@ -370,3 +401,71 @@ export const sleep = (time: number) => {
     if (time) setTimeout(() => resolve(), time);
   });
 };
+
+export const sleepInterval = (callback: (timerId: any, resolve: any) => void, time: number) => {
+  return new Promise<void>((resolve, reject) => {
+    let timerId = setInterval(() => {
+      callback(timerId, resolve);
+    }, time);
+  });
+};
+
+export function arrSome(arr1: any[], arr2: any[]) {
+  let arr: any[] = [];
+  arr1.forEach((item1: any) => {
+    arr2.forEach((item2: any) => {
+      if (item1 === item2?.id) {
+        arr.push(item1);
+      }
+    });
+  });
+  return arr;
+}
+
+export const isEmpty = (value: any) => {
+  if (value == null) return true;
+
+  if (typeof value === 'boolean') return false;
+
+  if (typeof value === 'number') return false;
+
+  if (value instanceof Error) return value.message === '';
+
+  switch (Object.prototype.toString.call(value)) {
+    // String or Array
+    case '[object String]':
+    case '[object Array]':
+      return !value.length;
+
+    // Map or Set or File
+    case '[object File]':
+    case '[object Map]':
+    case '[object Set]': {
+      return !value.size;
+    }
+    // Plain Object
+    case '[object Object]': {
+      return !Object.keys(value).length;
+    }
+  }
+
+  return false;
+};
+export function formatFileSize(fileSize: number) {
+  let temp: any = 0;
+  if (fileSize < 1024) {
+    return fileSize + 'B';
+  } else if (fileSize < 1024 * 1024) {
+    temp = fileSize / 1024;
+    temp = temp.toFixed(2);
+    return temp + 'KB';
+  } else if (fileSize < 1024 * 1024 * 1024) {
+    temp = fileSize / (1024 * 1024);
+    temp = temp.toFixed(2);
+    return temp + 'MB';
+  } else {
+    temp = fileSize / (1024 * 1024 * 1024);
+    temp = temp.toFixed(2);
+    return temp + 'GB';
+  }
+}
