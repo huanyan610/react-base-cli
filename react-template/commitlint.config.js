@@ -19,7 +19,7 @@ module.exports = {
     'header-max-length': [0, 'always', 120],
   },
 };
-//
+
 /**
  * 1. type
  * feat:     增加新功能

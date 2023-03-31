@@ -1,4 +1,4 @@
-import Axios from '@api/config/axios';
+import Axios from '@/api/config/axios';
 
 /**
  * 登录

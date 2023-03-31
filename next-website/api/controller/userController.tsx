@@ -1,5 +1,5 @@
-import Axios from '@api/config/axios';
-import { GAME_URL } from '@utils/env';
+import Axios from '@/api/config/axios';
+import { GAME_URL } from '@/utils/env';
 /**
  *
  * @return {Object} 返回值描述

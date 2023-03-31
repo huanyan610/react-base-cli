@@ -1,15 +1,19 @@
 # react-base
 
 ### 介绍
+
 react-base架构配置包括api、router、store、layouts等
 本项目采用react技术为基础开发者没有特殊业务情况一律采用react hooks方法开发。
 
 ### 版本须知
+
 （该部分是针对当前项目开发或者使用的库或者环境的版本声明）
+
 1. Node v14.x
 2. React v17.x
 
 ### 软件架构
+
 本项目致力于面向企业单位及大众用户，因此架构该项目旨在产品性能，用户体验，可维护性，安全性，可读性等。
 
 1. 技术选型。根据业务发展和团队发展决定采用了 React 技术栈，React 技术是目前前端最流行的技术，也是目前应用最广的技术并且 React 社区也相对活跃，基本上我们的项目在 React 相关问题上可以迎刃而解。
@@ -37,19 +41,20 @@ react-base架构配置包括api、router、store、layouts等
 
 ### 基础掌握
 
- 1.  基于node基础开发，需要掌握node的基础。同时使用的是yarn加载模块资源包，需要了解yarn的使用规则。使用的IDE为微软的VSCode，所以也需要掌握VSCode软件。
+ 1. 基于node基础开发，需要掌握node的基础。同时使用的是yarn加载模块资源包，需要了解yarn的使用规则。使用的IDE为微软的VSCode，所以也需要掌握VSCode软件。
 
- 2.  本版本采用的框架为react，16.13.1版本，需要掌握react开发技术基础。并且需掌握16.x版本新增特性，例如hook特性，需要注意的是，尽量使用函数编程，便于优化前端性能。
+ 2. 本版本采用的框架为react，16.13.1版本，需要掌握react开发技术基础。并且需掌握16.x版本新增特性，例如hook特性，需要注意的是，尽量使用函数编程，便于优化前端性能。
 
- 3.  同时本版本使用了Typescript编程，需要学习和了解Typescript的语言特点和使用规则。
+ 3. 同时本版本使用了Typescript编程，需要学习和了解Typescript的语言特点和使用规则。
 
- 4.  需要掌握redux、redux-thunk的基本知识，懂得项目路由和数据是如何传递和工作的。
+ 4. 需要掌握redux、redux-thunk的基本知识，懂得项目路由和数据是如何传递和工作的。
 
- 5.  对接数据接口API使用的是Axios，所以也需要了解Axios的知识要点。
+ 5. 对接数据接口API使用的是Axios，所以也需要了解Axios的知识要点。
 
     Ps.在使用redux模块对数据管理开发的过程，需要在浏览器中安装插件：[https://github.com/zalmoxisus/redux-devtools-extension](https://github.com/zalmoxisus/redux-devtools-extension)
 
 ### 目录
+
 ```
 ├── commitlint.config.js                   //commit-msg规则配置
 ├── config-overrides.js                    //webpack扩展配置
@@ -113,9 +118,9 @@ react-base架构配置包括api、router、store、layouts等
 │   ├── typings                             //ts 声明文件夹
 │   └── utils                               //公共工具文件夹
 ├── tsconfig.json                           //ts配置文件
-├── .env.development                        //测试环境 env配置文件 
-├── .env.production                         //生产环境 env配置文件   
-├── .env.development.local                  //本地环境 env配置文件 
+├── .env.development                        //测试环境 env配置文件
+├── .env.production                         //生产环境 env配置文件
+├── .env.development.local                  //本地环境 env配置文件
 └── yarn.lock
 
 ```
@@ -144,9 +149,9 @@ react-base架构配置包括api、router、store、layouts等
 
 **注意**
 
-> 使用npm 或者yarn 需要将镜像源切换成 http://171.217.71.138:4873/
+> 使用npm 或者yarn 需要将镜像源切换成 <http://171.217.71.138:4873/>
 
-> $ npm config set registry http://171.217.71.138:4873/
+> $ npm config set registry <http://171.217.71.138:4873/>
 
 [▲ 回目录](#目录)
 
@@ -157,6 +162,7 @@ REACT_APP_BASE_URL= https://api.dingdangcode.cn/
 REACT_APP_SCRATCH = https://scratch.dingdangcode.cn
 REACT_APP_ENV=development
 ```
+
 [▲ 回目录](#目录)
 
 ### <span id="-webpack配置">☞ webpack配置</span>
@@ -181,6 +187,7 @@ REACT_APP_ENV=development
     }
   })
 ```
+
 ```
  //build输出文件件
  const rewiredOutputPath = () => (config, env) => {
@@ -193,6 +200,7 @@ REACT_APP_ENV=development
   return config;
 }
 ```
+
 ```
  //antd按需加载
  fixBabelImports('import', {
@@ -201,6 +209,7 @@ REACT_APP_ENV=development
     style: true
  })
 ```
+
 ```
  //配置主题
  addLessLoader({
@@ -212,6 +221,7 @@ REACT_APP_ENV=development
 [▲ 回目录](#目录)
 
 ### <span id="-路由结构">☞ 路由结构</span>
+
 ```
 const routes: MenuBase[] = [
   // 菜单相关路由
@@ -290,6 +300,7 @@ const routes: MenuBase[] = [
   &nbsp;&nbsp;&nbsp;&nbsp;用于执行env环境文件
 
 #### 规范
+
 ##### [git commit message 规范](./GitCommit规范.md)
 
 ##### [项目规范](./项目规范.md)

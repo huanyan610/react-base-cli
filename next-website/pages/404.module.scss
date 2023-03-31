@@ -1,0 +1,15 @@
+.page_404 {
+  position: absolute;
+  left: 50%;
+  top: 10vh;
+  transform: translate(-50%, 0%);
+  text-align: center;
+  .page_div {
+    margin-top: -130px;
+    p {
+      margin-bottom: 16px;
+      color: #3a7dff;
+      font-size: 16px;
+    }
+  }
+}

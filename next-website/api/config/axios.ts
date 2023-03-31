@@ -44,7 +44,7 @@ class HttpRequest {
   private interceptors(instance: AxiosInstance, url: string) {
     // 在这里添加请求拦截
     instance.interceptors.request.use(
-      (config: AxiosRequestConfig) => {
+      (config: any) => {
         if (config?.headers) {
           config.url = encodeURI(url);
           // 接口请求的所有配置，都在这个config对象中，他的类型是AxiosRequestConfig，你可以看到他有哪些字段

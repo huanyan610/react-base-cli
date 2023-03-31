@@ -1,4 +1,5 @@
 import { AnyAction, createSlice, Reducer } from '@reduxjs/toolkit';
+import { HYDRATE } from 'next-redux-wrapper';
 
 import { AppState } from '@/redux/store';
 
@@ -51,18 +52,14 @@ export const userSlice = createSlice({
       state.credits += action.payload;
     },
   },
-  extraReducers: (builder) => {
-    builder
-      .addCase(logoutUser.fulfilled, () => initialState)
-      .addMatcher(isUserPendingAction, (state) => {
-        state.requestStatus = 'loading';
-      })
-      .addMatcher(isUserFulfilledAction, (_state, action) => {
-        return { requestStatus: 'completed', ...action.payload };
-      })
-      .addMatcher(isUserRejectedAction, (state) => {
-        state.requestStatus = 'failed';
-      });
+  extraReducers: {
+    [HYDRATE]: (state, action) => {
+      console.log('HYDRATE', state, action.payload);
+      // return {
+      //   ...state,
+      //   ...action.payload.subject,
+      // };
+    },
   },
 });
 

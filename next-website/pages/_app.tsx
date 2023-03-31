@@ -1,18 +1,24 @@
-import 'antd-mobile/es/global';
 import 'nprogress/nprogress.css';
 import '../styles/globals.scss';
 import 'react-app-polyfill/ie9';
 import 'react-app-polyfill/stable';
+import 'antd/dist/reset.css';
 
-import { wrapper } from '@redux/store';
-import { sleep } from '@utils/index';
+import { legacyLogicalPropertiesTransformer, StyleProvider } from '@ant-design/cssinjs';
 import ConfigProvider from 'antd/lib/config-provider';
-import zh_CN from 'antd/lib/locale-provider/zh_CN';
+import zh_CN from 'antd/locale/zh_CN';
+import dayjs from 'dayjs';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { parse } from 'next-useragent';
 import NProgress from 'nprogress';
 import React, { useEffect, useState } from 'react';
+import { wrapper } from 'store';
+import { sleep } from 'utils/index';
 
+require('dayjs/locale/zh-cn');
+
+dayjs.locale('zh-cn'); // 全局使用简体中文
 NProgress.configure({ easing: 'ease', showSpinner: false });
 
 const MyApp = ({ Component, pageProps }: any) => {
@@ -21,9 +27,6 @@ const MyApp = ({ Component, pageProps }: any) => {
 
   let ssrua = parse(pageProps?.userAgent);
 
-  useEffect(() => {
-    setUa(parse(window.navigator.userAgent));
-  }, [router]);
   // const userTicketFetch = async () => {
   //   const {
   //     data: { data, code, msg },
@@ -72,7 +75,16 @@ const MyApp = ({ Component, pageProps }: any) => {
     // init();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.onload = () => {
+        document.getElementById('holderStyle')?.remove();
+      };
+    }
+  });
+  useEffect(() => {
+    setUa(parse(window.navigator.userAgent));
+  }, [router]);
   useEffect(() => {
     const handleStart = () => {
       NProgress.start();
@@ -103,9 +115,26 @@ const MyApp = ({ Component, pageProps }: any) => {
 
   return (
     <>
-      <ConfigProvider locale={zh_CN}>
-        <Component {...pageProps} device={pageProps?.userAgent ? ssrua : ssgua} />
-      </ConfigProvider>
+      <Head>
+        <style
+          id="holderStyle"
+          dangerouslySetInnerHTML={{
+            __html: `
+      /* https://github.com/ant-design/ant-design/issues/16037#issuecomment-483140458 */
+      /* Not only antd, but also any other style if you want to use ssr. */
+      *, *::before, *::after {
+        transition: none!important;
+      }
+    `,
+          }}
+        />
+      </Head>
+
+      <StyleProvider hashPriority="high" transformers={[legacyLogicalPropertiesTransformer]}>
+        <ConfigProvider locale={zh_CN}>
+          <Component {...pageProps} device={pageProps?.userAgent ? ssrua : ssgua} />
+        </ConfigProvider>
+      </StyleProvider>
     </>
   );
 };
@@ -113,7 +142,6 @@ MyApp.getInitialProps = wrapper.getInitialAppProps((store: any) => async (contex
   return {
     pageProps: {
       userAgent: context.ctx.req?.headers['user-agent'],
-
       appProp: context.ctx.pathname,
     },
   };

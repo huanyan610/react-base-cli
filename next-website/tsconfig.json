@@ -16,23 +16,7 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@components/*": ["./components/*"],
-      "@api/*": ["./api/*"],
-      "@interfaces/*": ["./interfaces/*"],
-      "@layouts/*": ["./layouts/*"],
-      "@lib/*": ["./lib/*"],
-      "@pages/*": ["./pages/*"],
-      "@pageComponents/*": ["./pageComponents/*"],
-      "@static/*": ["./static/*"],
-      "@store/*": ["./store/*"],
-      "@redux/*": ["./redux/*"],
-      "@styles/*": ["./styles/*"],
-      "@utils/*": ["./utils/*"],
-      "@public/*": ["./public/*"],
-      "@middleware/*": ["middleware/*"],
-      "@assets/*": ["./assets/*"],
-      "@data/*": ["./data/*"],
-      "@locales/*": ["./locales/*"]
+      "@/*": ["./*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "utils", "data/routerList"],

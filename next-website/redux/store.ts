@@ -1,5 +1,5 @@
-import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit';
-import { createWrapper } from 'next-redux-wrapper';
+import { Action, configureStore, createSlice, ThunkAction } from '@reduxjs/toolkit';
+import { Context, createWrapper, HYDRATE } from 'next-redux-wrapper';
 
 import info from './info/slice';
 import user from './user/slice';

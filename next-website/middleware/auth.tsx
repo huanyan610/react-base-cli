@@ -1,5 +1,6 @@
-import { getCookie } from '@utils/_cookies';
-import { userInfo } from '@api/controller/userController';
+import { getCookie } from 'utils/_cookies';
+
+import { userInfo } from '@/api/controller/userController';
 // import { loginAction } from '@store/login/action';
 
 /**
