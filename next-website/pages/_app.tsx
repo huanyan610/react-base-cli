@@ -13,8 +13,9 @@ import { useRouter } from 'next/router';
 import { parse } from 'next-useragent';
 import NProgress from 'nprogress';
 import React, { useEffect, useState } from 'react';
-import { wrapper } from 'store';
 import { sleep } from 'utils/index';
+
+import { wrapper } from '@/redux/store';
 
 require('dayjs/locale/zh-cn');
 
