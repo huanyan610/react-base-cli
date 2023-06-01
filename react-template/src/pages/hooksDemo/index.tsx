@@ -1,4 +1,4 @@
-import { Button } from 'antd';
+import { Button, Input } from 'antd';
 import React, { FC, memo, useCallback, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router';
 
@@ -23,6 +23,7 @@ const HooksDemo: FC = () => {
 
   return (
     <div style={{ padding: 20 }}>
+      <Input />
       <Button onClick={() => history('/')}>go Back</Button>
       <div>
         <h1>使用memo优化react性能</h1>

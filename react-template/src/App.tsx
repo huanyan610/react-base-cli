@@ -1,5 +1,6 @@
 import './App.scss';
 
+import { legacyLogicalPropertiesTransformer, StyleProvider } from '@ant-design/cssinjs';
 import { ConfigProvider } from 'antd';
 import zhCN from 'antd/locale/zh_CN';
 import dayjs from 'dayjs';
@@ -14,16 +15,19 @@ dayjs.locale('zh-cn'); // 全局使用简体中文
 
 function App() {
   return (
-    <ConfigProvider
-      locale={zhCN}
-      theme={{
-        token: { borderRadius: 4 },
-      }}
-    >
-      <BrowserRouter>
-        <RenderRoute routes={routes} extraProps={{}}></RenderRoute>
-      </BrowserRouter>
-    </ConfigProvider>
+    <StyleProvider hashPriority="high" transformers={[legacyLogicalPropertiesTransformer]}>
+      <ConfigProvider
+        locale={zhCN}
+        theme={{
+          token: { borderRadius: 4, colorPrimary: '#1476ff', colorBorder: '#e9eaeb' },
+          components: { Button: { controlHeight: 28 } },
+        }}
+      >
+        <BrowserRouter>
+          <RenderRoute routes={routes}></RenderRoute>
+        </BrowserRouter>
+      </ConfigProvider>
+    </StyleProvider>
   );
 }
 

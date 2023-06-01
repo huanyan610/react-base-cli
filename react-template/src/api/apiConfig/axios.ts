@@ -37,7 +37,7 @@ class HttpRequest {
   private interceptors(instance: AxiosInstance, url?: string) {
     // 在这里添加请求拦截
     instance.interceptors.request.use(
-      (config: AxiosRequestConfig) => {
+      (config) => {
         // 接口请求的所有配置，都在这个config对象中，他的类型是AxiosRequestConfig，你可以看到他有哪些字段
         // 如果你要修改接口请求配置，需要修改 axios.defaults 上的字段值
         if (config?.headers)
@@ -54,9 +54,11 @@ class HttpRequest {
       (res: AxiosResponse) => {
         const { data } = res; // res的类型是AxiosResponse<any>，包含六个字段，其中data是服务端返回的数据
 
-        const { code } = data || {};
+        const { code, msg } = data || {};
 
         if (code === AxiosReasonseCodeEnum.NOAUTH) {
+        } else if (code !== 200) {
+          message.error(msg);
         }
 
         return data?.data
@@ -163,4 +165,5 @@ export const getConfirmation = (meg = '', callback = () => {}) => {
   callback();
 };
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default new HttpRequest();

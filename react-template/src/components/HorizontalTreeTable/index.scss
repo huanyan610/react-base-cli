@@ -1,0 +1,124 @@
+// 创建角色的权限表格
+$auth-block-border: 1px solid #eee;
+
+.horizontal-treetable {
+  overflow: hidden;
+  border: $auth-block-border;
+  border-bottom: 0;
+
+  .treetable-head {
+    border-bottom: $auth-block-border;
+
+    .box-item {
+      line-height: 40px;
+    }
+  }
+
+  .treetable-body {
+    .box-item {
+      line-height: unset;
+
+      .text-container-wrapper {
+        display: inline-flex;
+      }
+    }
+
+    .treetable-item {
+      .box-item {
+        border-bottom: $auth-block-border;
+        padding-left: 0;
+
+        &.empty {
+          display: none;
+          border-bottom: $auth-block-border;
+        }
+
+        .ant-checkbox-wrapper {
+          padding-left: 16px;
+        }
+      }
+
+      &.empty {
+        border-bottom: $auth-block-border;
+      }
+    }
+
+    .treetable-empty-item {
+      border-bottom: $auth-block-border;
+      height: 100%;
+    }
+  }
+
+  .ant-checkbox-group {
+    width: 100%;
+  }
+
+  .treetable-row {
+    display: flex;
+    justify-content: left;
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  .treetable-column {
+    display: flex;
+    min-width: 180px;
+    text-align: left;
+
+    &.direction-column {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &.column-item {
+      .treetable-item {
+        display: flex;
+        flex-direction: column;
+      }
+    }
+
+    &.full-item {
+      .treetable-item {
+        width: 100%;
+        height: 100%;
+
+        .box-item {
+          width: inherit;
+          height: inherit;
+        }
+      }
+    }
+  }
+
+  .treetable-item {
+    min-height: 40px;
+    text-align: left;
+    cursor: pointer;
+
+    .box-item {
+      display: inline-block;
+      word-break: keep-all;
+
+      .ant-checkbox-wrapper {
+        width: 100%;
+      }
+
+      &:hover {
+        background-color: #f8f9fa;
+      }
+    }
+  }
+
+  // 边框
+  .treetable-column {
+    border-left: $auth-block-border;
+
+    &:first-child {
+      border-left: none;
+    }
+  }
+
+  .text-container-wrapper {
+    display: inline-flex;
+  }
+}

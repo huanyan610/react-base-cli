@@ -38,18 +38,18 @@ export const userSlice = createSlice({
       return { ...state, ...action.payload };
     },
   },
-  extraReducers: (builder) => {
+  extraReducers: (builder: any) => {
     builder
-      .addCase(loginUser.fulfilled, (state, action) => {
+      .addCase(loginUser.fulfilled, (state: any, action: any) => {
         return { ...state, ...action.payload };
       })
-      .addMatcher(isUserPendingAction, (state) => {
+      .addMatcher(isUserPendingAction, (state: any) => {
         state.requestStatus = 'loading';
       })
-      .addMatcher(isUserFulfilledAction, (state) => {
+      .addMatcher(isUserFulfilledAction, (state: any) => {
         state.requestStatus = 'completed';
       })
-      .addMatcher(isUserRejectedAction, (state) => {
+      .addMatcher(isUserRejectedAction, (state: any) => {
         state.requestStatus = 'failed';
       });
   },
