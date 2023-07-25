@@ -30,11 +30,5 @@ module.exports = {
       const postcssOptions = postcss.options;
       postcss.options = { postcssOptions };
     }),
-    addPostcssPlugins([
-      require('postcss-preset-env')({
-        browsers: 'Safari >= 13, not dead, not op_mini all',
-        autoprefixer: { grid: true }, // 如果需要支持CSS Grid，则需启用此项
-      }),
-    ])
   ),
 };

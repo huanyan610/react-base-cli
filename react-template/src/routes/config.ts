@@ -9,8 +9,9 @@ interface Imate {
 }
 export interface MenuBase {
   path: string;
-  replace?: string;
   name: string;
+  label?: string;
+  replace?: string;
   mate?: Imate;
   layout?: React.ReactElement | any;
   element?: React.ReactElement | LazyExoticComponent<any> | any;
@@ -21,12 +22,14 @@ const routes: MenuBase[] = [
   {
     path: '/',
     name: 'home',
+    label: 'Home',
     layout: BasicLayout,
     element: lazy(() => import('@/pages/home')),
   },
   {
     path: '/hooksDemo',
     name: 'hooksDemo',
+    label: 'hooksDemo',
     layout: BasicLayout,
     element: lazy(() => import('@/pages/hooksDemo')),
   },

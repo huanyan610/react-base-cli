@@ -46,7 +46,7 @@ function renderRoute(routes: MenuBase[], extraProps = {}) {
 const SuspenseComponent = (route: MenuBase, extraProps: any) => {
   return (
     <Suspense fallback={<></>}>
-      <route.element route={route} {...extraProps} />
+      {route.element ? <route.element route={route} {...extraProps} /> : <></>}
     </Suspense>
   );
 };
@@ -54,6 +54,7 @@ const SuspenseComponent = (route: MenuBase, extraProps: any) => {
 function RoutesElement(props: Iprops) {
   const { routes = [], extraProps } = props;
   console.log('RoutesElement', routes);
+  console.log(renderRoute(routes));
   return (
     <Routes>
       {routes ? renderRoute(routes, extraProps) : <></>}

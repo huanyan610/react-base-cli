@@ -9,13 +9,14 @@ import { useLocation, useNavigate } from 'react-router';
 import Header from '@/components/Header';
 import IconFont from '@/components/IconFont';
 import { collapsedAction, openKeyAction, selectKeyAction } from '@/redux/baseLayout/slice';
+import { projectMenuRoutes, roleMenuRoutes } from '@/routes/menuRoutes';
 
 import styles from './BasicLayout.module.scss';
 
 type MenuItem = Required<MenuProps>['items'][number];
 
 const { Sider } = Layout;
-
+const { SubMenu } = Menu;
 function getItem(
   label?: React.ReactNode,
   key?: React.Key,
@@ -36,23 +37,6 @@ const BasicLayout = (props: any) => {
   const { children } = props;
   const { collapsed, selectKeys, openKeys } = useSelector((state: any) => state.baseLayout);
 
-  const items: MenuProps['items'] = useMemo(
-    () => [
-      getItem('home', '/home', <CheckCircleOutlined style={{ fontSize: 16, color: '#667180' }} />),
-      getItem(
-        'hooksDemo',
-        '/hooksDemo',
-        <SettingOutlined style={{ fontSize: 16, color: '#667180' }} />,
-        [getItem('hooksDemo', '/hooksDemo', null)]
-      ),
-      getItem('sub3', 'sub3', <IconFont type="" style={{ fontSize: 16, color: '#667180' }} />, [
-        getItem('sub3-1', 'sub3-1'),
-        getItem('sub3-2', 'sub3-2'),
-      ]),
-    ],
-    []
-  );
-
   const router = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
@@ -62,8 +46,8 @@ const BasicLayout = (props: any) => {
     dispatch(openKeyAction(value));
   };
 
-  const onClickMenu: MenuProps['onClick'] = (e) => {
-    router(`${e.key}`);
+  const onClickMenu: MenuProps['onClick'] = (path) => {
+    router(`${path}`);
   };
 
   useEffect(() => {
@@ -89,25 +73,117 @@ const BasicLayout = (props: any) => {
     <div className={classNames(styles['wrap'])} id="BasicLayoutWrap">
       <Header />
       <section className={styles['content']}>
-        <div className={styles['sider']}>
+        <div className={styles['sider-wrapper']}>
           <Sider
             collapsible
             collapsed={collapsed}
-            onCollapse={(value) => dispatch(collapsedAction(value))}
-            width={256}
+            onCollapse={(value) => {
+              dispatch(collapsedAction(value));
+            }}
+            width={240}
           >
             <Menu
               style={{ height: 'calc(100vh - 107px)', overflowY: 'auto' }}
               mode="inline"
               onOpenChange={onOpen}
-              onClick={onClickMenu}
               defaultOpenKeys={openKeys}
               selectedKeys={selectKeys}
               openKeys={openKeys}
-              items={items}
-            />
+            >
+              {/* 项目权限菜单 */}
+              <>
+                {projectMenuRoutes?.map((item: any) => (
+                  <>
+                    {item?.children?.length > 0 ? (
+                      <SubMenu key={item?.path} title={item?.name} icon={<></>}>
+                        {item?.children?.map((_item: any) => (
+                          <>
+                            {_item?.children?.length > 0 ? (
+                              <>
+                                <SubMenu key={_item?.path} title={_item?.name}>
+                                  {_item?.children?.map((__item: any) => (
+                                    <Menu.Item
+                                      key={__item?.path}
+                                      onClick={() => onClickMenu(__item?.path)}
+                                    >
+                                      {__item?.name}
+                                    </Menu.Item>
+                                  ))}
+                                </SubMenu>
+                              </>
+                            ) : (
+                              <Menu.Item key={_item?.path} onClick={() => onClickMenu(_item?.path)}>
+                                {_item?.name}
+                              </Menu.Item>
+                            )}
+                          </>
+                        ))}
+                      </SubMenu>
+                    ) : (
+                      <>
+                        {item && (
+                          <Menu.Item
+                            key={item?.path}
+                            icon={<></>}
+                            onClick={() => onClickMenu(item?.path)}
+                          >
+                            {item?.name}
+                          </Menu.Item>
+                        )}
+                      </>
+                    )}
+                  </>
+                ))}
+              </>
+              {/* 角色管理权限菜单 */}
+              <>
+                {roleMenuRoutes?.map((item: any) => (
+                  <>
+                    {item?.children?.length > 0 ? (
+                      <SubMenu key={item?.path} title={item?.name} icon={<></>}>
+                        {item?.children?.map((_item: any) => (
+                          <>
+                            {_item?.children?.length > 0 ? (
+                              <>
+                                <SubMenu key={_item?.path} title={_item?.name}>
+                                  {_item?.children?.map((__item: any) => (
+                                    <Menu.Item
+                                      key={__item?.path}
+                                      onClick={() => onClickMenu(__item?.path)}
+                                    >
+                                      {__item?.name}
+                                    </Menu.Item>
+                                  ))}
+                                </SubMenu>
+                              </>
+                            ) : (
+                              <Menu.Item key={_item?.path} onClick={() => onClickMenu(_item?.path)}>
+                                {_item?.name}
+                              </Menu.Item>
+                            )}
+                          </>
+                        ))}
+                      </SubMenu>
+                    ) : (
+                      <>
+                        {item && (
+                          <Menu.Item
+                            key={item?.path}
+                            icon={<></>}
+                            onClick={() => onClickMenu(item?.path)}
+                          >
+                            {item?.name}
+                          </Menu.Item>
+                        )}
+                      </>
+                    )}
+                  </>
+                ))}
+              </>
+            </Menu>
           </Sider>
         </div>
+        <div className={styles['sider-menu-wrapper']}></div>
         <MainCb />
       </section>
     </div>

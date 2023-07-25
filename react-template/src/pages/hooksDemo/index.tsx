@@ -8,7 +8,8 @@ import UseImperativeHandle from './useImperativeHandle';
 const MemoTestChild1 = memo(Child1); //对子组件进行处理
 const MemoTestChild2 = memo(Child2); //对子组件进行处理
 const MemoTestChild3 = memo(Child3); //对子组件进行处理
-const HooksDemo: FC = () => {
+const HooksDemo: FC = (props: any) => {
+  console.log('props', props);
   const history = useNavigate();
 
   const [count1, setCount1] = useState<number>(1);
